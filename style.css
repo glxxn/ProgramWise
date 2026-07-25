@@ -18,7 +18,7 @@
 
   /* the two syntax accents that carry the whole brand */
   --gold: #e3a53c;    /* keyword / def / primary actions */
-  --teal: #4B8BBE;    /* string / output / secondary actions */
+  --teal: #4b8bbe;    /* string / output / secondary actions */
 
   --ok: #4ade80;
   --err: #f87171;
@@ -62,7 +62,6 @@ body{
   align-items: center;
   white-space: nowrap;
 }
-
 .pw-logo .cursor{
   display:inline-block;
   width: 8px;
@@ -82,17 +81,23 @@ body{
   padding:0;
   flex-wrap: wrap;
 }
-.pw-nav a{
+.pw-nav a,
+.pw-nav .pw-nav-btn{
   font-family: var(--font-mono);
   font-size: 13.5px;
   color: var(--mute);
   text-decoration:none;
+  background: none;
+  border: none;
   padding: 4px 1px 6px;
   border-bottom: 2px solid transparent;
+  cursor: pointer;
   transition: color .15s ease, border-color .15s ease;
 }
-.pw-nav a:hover{ color: var(--paper); }
-.pw-nav a.active{ color: var(--gold); border-color: var(--gold); }
+.pw-nav a:hover,
+.pw-nav .pw-nav-btn:hover{ color: var(--paper); }
+.pw-nav a.active,
+.pw-nav .pw-nav-btn.active{ color: var(--gold); border-color: var(--gold); }
 
 @media (max-width: 720px){
   .pw-header{ flex-direction:column; align-items:flex-start; gap:12px; padding:14px 20px; }
@@ -101,4 +106,100 @@ body{
 
 @media (prefers-reduced-motion: reduce){
   .pw-logo .cursor{ animation:none; opacity:1; }
+}
+
+/* ---------------- Modals (License info / TCO presentation / Contact) ---------------- */
+.pw-modal-overlay{
+  position: fixed;
+  inset: 0;
+  background: rgba(10,11,15,0.65);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  z-index: 1000;
+}
+.pw-modal-overlay[hidden]{ display:none; }
+
+.pw-modal{
+  background: var(--panel-raised);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  width: 100%;
+  max-width: 560px;
+  max-height: min(80vh, 640px);
+  overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.45);
+  animation: pw-modalIn .18s ease;
+}
+@keyframes pw-modalIn{
+  from{ opacity:0; transform: translateY(8px) scale(.98); }
+  to{ opacity:1; transform:none; }
+}
+
+.pw-modal-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap: 16px;
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--line);
+  position: sticky;
+  top: 0;
+  background: var(--panel-raised);
+}
+.pw-modal-head h2{
+  font-family: var(--font-mono);
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: var(--mute);
+  margin: 0;
+}
+.pw-modal-close{
+  background: transparent;
+  border: 1px solid var(--line);
+  color: var(--paper);
+  width: 30px;
+  height: 30px;
+  border-radius: 7px;
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-shrink: 0;
+  transition: border-color .15s ease, color .15s ease;
+}
+.pw-modal-close:hover{ border-color: var(--teal); color: var(--teal); }
+
+.pw-modal-body{ padding: 22px 24px 28px; }
+.pw-modal-body p{ color: var(--mute); font-size: 15px; line-height: 1.75; margin: 0 0 14px; }
+.pw-modal-body p:last-child{ margin-bottom: 0; }
+.pw-modal-body code{
+  font-family: var(--font-mono);
+  background: var(--panel);
+  border: 1px solid var(--line);
+  padding: 2px 6px;
+  border-radius: 4px;
+  color: var(--paper);
+  font-size: 13.5px;
+}
+.pw-modal-body .pw-placeholder-box{
+  border: 1px dashed var(--line);
+  border-radius: 8px;
+  padding: 18px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--mute);
+  text-align: center;
+}
+
+body.pw-modal-open{ overflow: hidden; }
+
+@media (max-width: 640px){
+  .pw-modal{ max-height: 85vh; }
 }

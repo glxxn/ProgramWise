@@ -135,9 +135,11 @@
   <a href="index.html#about" class="pw-logo">ProgramWise<span class="cursor"></span></a>
   <ul class="pw-nav">
     <li><a href="index.html#about">about</a></li>
-    <li><a href="index.html#license">license info</a></li>
     <li><a href="learn-python.html">learn python</a></li>
     <li><a href="python-web-interpreter.html" class="active">code runner</a></li>
+    <li><button type="button" class="pw-nav-btn" data-modal-open="license-modal">license info</button></li>
+    <li><button type="button" class="pw-nav-btn" data-modal-open="tco-modal">TCO presentation</button></li>
+    <li><button type="button" class="pw-nav-btn" data-modal-open="contact-modal">contact</button></li>
   </ul>
 </header>
 
@@ -156,7 +158,7 @@ import math
 print(f"Pi is approximately {math.pi:.4f}")
 
 for i in range(5):
-    print(f"Count: {i}")
+	print(f"Count: {i}")
 </textarea>
 
   <div class="toolbar">
@@ -279,6 +281,50 @@ del _programwise_input
 
   setup();
 </script>
+
+<!-- ---------------- Modals ---------------- -->
+
+<div class="pw-modal-overlay" id="license-modal" hidden>
+  <div class="pw-modal" role="dialog" aria-modal="true" aria-labelledby="license-modal-title">
+    <div class="pw-modal-head">
+      <h2 id="license-modal-title">License info</h2>
+      <button type="button" class="pw-modal-close" data-modal-close aria-label="Close">&times;</button>
+    </div>
+    <div class="pw-modal-body">
+      <p>Lesson text and example code on ProgramWise are shared under <code>CC BY-NC 4.0</code> — free to read, adapt, and reuse for non-commercial purposes, with credit back to ProgramWise. The site's own source (including the code runner) is available under the <code>MIT license</code>.</p>
+      <p>This is placeholder licensing copy — swap in your actual terms before this goes live.</p>
+    </div>
+  </div>
+</div>
+
+<div class="pw-modal-overlay" id="tco-modal" hidden>
+  <div class="pw-modal" role="dialog" aria-modal="true" aria-labelledby="tco-modal-title">
+    <div class="pw-modal-head">
+      <h2 id="tco-modal-title">TCO presentation</h2>
+      <button type="button" class="pw-modal-close" data-modal-close aria-label="Close">&times;</button>
+    </div>
+    <div class="pw-modal-body">
+      <p>This is a placeholder for a Total Cost of Ownership presentation — replace this with your slides, an embedded deck, a PDF link, or a written summary.</p>
+      <div class="pw-placeholder-box">[ embed or link your TCO presentation here ]</div>
+    </div>
+  </div>
+</div>
+
+<div class="pw-modal-overlay" id="contact-modal" hidden>
+  <div class="pw-modal" role="dialog" aria-modal="true" aria-labelledby="contact-modal-title">
+    <div class="pw-modal-head">
+      <h2 id="contact-modal-title">Contact</h2>
+      <button type="button" class="pw-modal-close" data-modal-close aria-label="Close">&times;</button>
+    </div>
+    <div class="pw-modal-body">
+      <p>Have a question, found a bug, or want to say hi? Reach out any time.</p>
+      <p>Email: <code>hello@programwise.example</code></p>
+      <p>This is placeholder contact info — swap in your real email, socials, or a working contact form.</p>
+    </div>
+  </div>
+</div>
+
+<script src="modals.js"></script>
 
 </body>
 </html>
