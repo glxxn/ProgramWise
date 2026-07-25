@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ProgramWise — Learn Python by running it</title>
+<link rel="stylesheet" href="style.css" />
+<style>
+  main{
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+  section{ padding: 96px 0; border-bottom: 1px solid var(--line); }
+  section:last-of-type{ border-bottom: none; }
+  h2{
+    font-family: var(--font-mono);
+    font-size: 13px;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: var(--mute);
+    margin: 0 0 28px;
+  }
+
+  /* ---------- Hero ---------- */
+  .hero{ padding-top: 72px; text-align:left; }
+  .code-block{
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 26px 28px;
+    font-family: var(--font-mono);
+    font-size: 16px;
+    line-height: 1.75;
+    max-width: 560px;
+    margin: 0 0 22px;
+    overflow-x:auto;
+  }
+  .code-block .line{ opacity:0; animation: pw-lineIn .45s ease forwards; white-space:pre; }
+  .code-block .line:nth-child(1){ animation-delay: .10s; }
+  .code-block .line:nth-child(2){ animation-delay: .35s; }
+  .code-block .line:nth-child(3){ animation-delay: .60s; }
+  .code-block .line:nth-child(4){ animation-delay: .85s; }
+  .code-block .line:nth-child(5){ animation-delay: 1.00s; }
+  .code-block .line:nth-child(6){ animation-delay: 1.15s; }
+  @keyframes pw-lineIn{ from{ opacity:0; transform: translateY(5px);} to{ opacity:1; transform:none; } }
+
+  .tok-com{ color: var(--mute); }
+  .tok-kw{ color: var(--gold); font-weight:600; }
+  .tok-fn{ color: var(--paper); font-weight:600; }
+  .tok-str{ color: var(--teal); }
+
+  .hero-output{
+    font-family: var(--font-mono);
+    font-size: 14.5px;
+    max-width: 560px;
+    padding: 14px 28px;
+    margin: -6px 0 26px;
+    color: var(--teal);
+    opacity: 0;
+    animation: pw-lineIn .5s ease forwards;
+    animation-delay: 1.55s;
+  }
+  .hero-output .meta{ color: var(--mute); margin-left: 10px; }
+
+  @media (prefers-reduced-motion: reduce){
+    .code-block .line, .hero-output{ animation:none; opacity:1; }
+  }
+
+  .hero-tagline{
+    font-size: 19px;
+    line-height:1.6;
+    color: var(--paper);
+    max-width: 560px;
+    margin: 0 0 30px;
+  }
+  .hero-ctas{ display:flex; gap:14px; flex-wrap:wrap; }
+  .btn{
+    font-family: var(--font-mono);
+    font-size: 14px;
+    font-weight:600;
+    text-decoration:none;
+    padding: 13px 22px;
+    border-radius: 8px;
+    display:inline-block;
+    transition: transform .12s ease, background .15s ease, border-color .15s ease;
+  }
+  .btn:hover{ transform: translateY(-1px); }
+  .btn-primary{ background: var(--gold); color: var(--ink); }
+  .btn-primary:hover{ background: #eab663; }
+  .btn-ghost{ background: transparent; color: var(--paper); border: 1px solid var(--line); }
+  .btn-ghost:hover{ border-color: var(--teal); color: var(--teal); }
+
+  /* ---------- Curriculum ---------- */
+  .file-tree{ list-style:none; margin:0; padding:0; max-width: 680px; }
+  .file-tree li{
+    display:flex;
+    gap: 18px;
+    align-items:baseline;
+    padding: 13px 0;
+    border-bottom: 1px dashed var(--line);
+    font-family: var(--font-mono);
+    font-size: 14.5px;
+  }
+  .file-tree li:last-child{ border-bottom:none; }
+  .fnum{ color: var(--mute); width: 20px; flex-shrink:0; }
+  .fname{ color: var(--gold); flex-shrink:0; min-width: 175px; }
+  .fdesc{ color: var(--mute); font-family: var(--font-sans); font-size: 14.5px; }
+
+  /* ---------- Why ---------- */
+  .why-grid{
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+  }
+  .why-card{
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 24px 22px;
+  }
+  .why-card .tag{
+    display:block;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: bold;
+    color: var(--teal);
+    margin-bottom: 12px;
+  }
+  .why-card p{ margin:0; color: var(--paper); font-size: 15px; line-height:1.6; }
+  @media (max-width: 760px){ .why-grid{ grid-template-columns: 1fr; } }
+
+  /* ---------- Docstring / About ---------- */
+  .doc-block{
+    background: var(--panel);
+    border-left: 3px solid var(--gold);
+    border-radius: 6px;
+    padding: 28px 30px;
+    max-width: 700px;
+  }
+  .doc-quote{
+    font-family: var(--font-mono);
+    color: var(--mute);
+    margin: 0 0 14px;
+    font-size: 14px;
+  }
+  .doc-block p.body{ margin:0 0 14px; color: var(--paper); font-size: 16px; line-height:1.75; }
+  .doc-block p.body:last-child{ margin-bottom:0; }
+
+  /* ---------- License ---------- */
+  .license p{ max-width: 700px; color: var(--mute); font-size: 15px; line-height:1.75; }
+  .license code{
+    font-family: var(--font-mono);
+    background: var(--panel);
+    border: 1px solid var(--line);
+    padding: 2px 6px;
+    border-radius: 4px;
+    color: var(--paper);
+    font-size: 13.5px;
+  }
+
+  /* ---------- Footer ---------- */
+  .pw-footer{
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 40px 32px 60px;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--mute);
+  }
+</style>
+</head>
+<body>
+
+<header class="pw-header">
+  <a href="index.html#about" class="pw-logo">ProgramWise<span class="cursor"></span></a>
+  <ul class="pw-nav">
+    <li><a href="index.html#about" class="active">about</a></li>
+    <li><a href="learn-python.html">learn python</a></li>
+    <li><a href="python-web-interpreter.html">code runner</a></li>
+    <li><a href="index.html#license">license info</a></li>
+  </ul>
+</header>
+
+<main>
+
+  <section class="hero" id="about">
+    <pre class="code-block"><span class="line"><span class="tok-com"># welcome to</span></span>
+<span class="line"><span class="tok-kw">class</span> <span class="tok-fn">ProgramWise</span>:</span>
+<span class="line">    <span class="tok-kw">def</span> <span class="tok-fn">teach</span>(self, you):</span>
+<span class="line">        <span class="tok-kw">return</span> <span class="tok-str">"confidence, one line at a time"</span></span>
+<span class="line">&nbsp;</span>
+<span class="line">ProgramWise().teach(you)</span></pre>
+    <div class="hero-output">&gt;&gt;&gt; confidence, one line at a time<span class="meta"># ran in 0.04s</span></div>
+
+    <p class="hero-tagline">A place to actually run the code while you learn it — no installs, no setup, just Python in your browser.</p>
+
+    <div class="hero-ctas">
+      <a class="btn btn-primary" href="learn-python.html">Start learning →</a>
+      <a class="btn btn-ghost" href="python-web-interpreter.html">Open the code runner</a>
+    </div>
+  </section>
+
+  <section class="curriculum">
+    <h2>The course, laid out like a project</h2>
+    <ul class="file-tree">
+      <li><span class="fnum">01</span><span class="fname">basics.py</span><span class="fdesc">variables, types, and your first print()</span></li>
+      <li><span class="fnum">02</span><span class="fname">control_flow.py</span><span class="fdesc">if / else, loops, and teaching your program to decide things</span></li>
+      <li><span class="fnum">03</span><span class="fname">functions.py</span><span class="fdesc">writing reusable logic instead of repeating yourself</span></li>
+      <li><span class="fnum">04</span><span class="fname">data_structures.py</span><span class="fdesc">lists, dicts, tuples, and sets — and when to use which</span></li>
+      <li><span class="fnum">05</span><span class="fname">files_and_errors.py</span><span class="fdesc">reading input and handling what inevitably goes wrong</span></li>
+      <li><span class="fnum">06</span><span class="fname">oop.py</span><span class="fdesc">classes, objects, and thinking in blueprints</span></li>
+      <li><span class="fnum">07</span><span class="fname">mini_projects/</span><span class="fdesc">small builds that tie everything above together</span></li>
+    </ul>
+  </section>
+
+  <section class="why">
+    <h2>Why ProgramWise</h2>
+    <div class="why-grid">
+      <div class="why-card">
+        <span class="tag"># no_setup</span>
+        <p>Every lesson runs right in your browser. No installers, no PATH variables, no "it works on my machine."</p>
+      </div>
+      <div class="why-card">
+        <span class="tag"># learn_by_doing</span>
+        <p>Read three lines, then go break them on purpose. Every example has a live runner attached, not just a screenshot.</p>
+      </div>
+      <div class="why-card">
+        <span class="tag"># built_for_beginners</span>
+        <p>No assumed background. We explain the "why" behind the syntax, not just the syntax itself.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="mission">
+    <h2>About</h2>
+    <div class="doc-block">
+      <p class="doc-quote">"""About ProgramWise"""</p>
+      <p class="body">Most tutorials tell you about code instead of letting you touch it. ProgramWise started from that frustration — every lesson pairs a short, plain-language explanation with a code runner right next to it, so the gap between reading and doing disappears.</p>
+      <p class="body">There's no assumed background and no filler. Just enough explanation to understand what a line of code does, and enough room to go try it yourself before moving on.</p>
+    </div>
+  </section>
+
+  <section class="license" id="license">
+    <h2>License info</h2>
+    <p>Lesson text and example code on ProgramWise are shared under <code>CC BY-NC 4.0</code> — free to read, adapt, and reuse for non-commercial purposes, with credit back to ProgramWise. The site's own source (including the code runner) is available under the <code>MIT license</code>.</p>
+    <p>This is placeholder licensing copy — swap in your actual terms before this goes live.</p>
+  </section>
+
+</main>
+
+<footer class="pw-footer">
+  © 2026 ProgramWise. Built with Python, run entirely in your browser.
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ProgramWise — Code Runner</title>
+<link rel="stylesheet" href="style.css" />
+
+<!--
+  PYODIDE — real CPython compiled to WebAssembly. Runs 100% in the visitor's
+  browser. Nothing executes on your EC2 server, so there's no server-side
+  Python install and no risk of arbitrary user code hitting your machine.
+  Swap the version number below if a newer one is out (check pyodide.org).
+-->
+<script src="https://cdn.jsdelivr.net/pyodide/v0.26.4/full/pyodide.js"></script>
+
+<!--
+  CODEMIRROR 5 — adds syntax highlighting, auto-indent, bracket/quote
+  auto-closing, bracket matching, and line numbers to the plain textarea.
+  All loaded from cdnjs; nothing to install server-side for this either.
+-->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/theme/dracula.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/python/python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/edit/closebrackets.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/edit/matchbrackets.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/selection/active-line.min.js"></script>
+
+<style>
+  /* Color tokens (--ink, --panel, --line, --paper, --mute, --gold, --teal,
+     --ok, --err, --font-mono) come from the shared style.css so this page
+     matches the rest of the ProgramWise site. */
+  :root{ --accent-hover: #eab663; }
+
+  body{
+    margin:0;
+    background: var(--ink);
+    min-height: 100vh;
+  }
+  .wrap{
+    width: calc(100% - 24px);
+    max-width: 900px;
+    margin: 32px auto;
+    background: var(--panel-raised);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    overflow:hidden;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+  }
+  .titlebar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--line);
+  }
+  .titlebar h1{
+    font-size: 15px;
+    margin:0;
+    font-weight:600;
+    display:flex;
+    align-items:center;
+    gap:8px;
+    font-family: var(--font-sans);
+  }
+  .dot{ width:9px; height:9px; border-radius:50%; background: var(--mute); display:inline-block; }
+  .dot.ready{ background: var(--ok); }
+  .status{ font-size:12px; color:var(--mute); }
+
+  /* CodeMirror integration — keep it visually consistent with the panel */
+  .CodeMirror{
+    height: 280px;
+    font-family: var(--font-mono);
+    font-size: 14px;
+    line-height: 1.5;
+    border-bottom: 1px solid var(--line);
+    background: var(--panel) !important;
+  }
+  .CodeMirror-gutters{
+    background: var(--panel) !important;
+    border-right: 1px solid var(--line) !important;
+  }
+  .CodeMirror-linenumber{ color: var(--mute) !important; }
+  .CodeMirror-activeline-background{ background: rgba(255,255,255,0.04) !important; }
+  .CodeMirror-matchingbracket{
+    color: var(--teal) !important;
+    font-weight: bold;
+    text-decoration: underline;
+  }
+
+  .toolbar{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding: 12px 18px;
+    border-bottom: 1px solid var(--line);
+  }
+  button{
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight:600;
+    border:none;
+    border-radius: 7px;
+    padding: 9px 16px;
+    cursor:pointer;
+    transition: background .15s ease;
+  }
+  #run{ background: var(--gold); color: var(--ink); }
+  #run:hover{ background: var(--accent-hover); }
+  #run:disabled{ background: var(--line); color: var(--mute); cursor:not-allowed; }
+  #clear{ background: transparent; color: var(--mute); border:1px solid var(--line); }
+  #clear:hover{ color:var(--paper); border-color:var(--mute); }
+  .hint{ margin-left:auto; font-size:12px; color:var(--mute); font-family: var(--font-sans); }
+  pre#output{
+    margin:0;
+    padding: 16px 18px;
+    min-height: 140px;
+    max-height: 320px;
+    overflow:auto;
+    background: var(--panel);
+    font-family: var(--font-mono);
+    font-size: 13px;
+    line-height:1.6;
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+  .out-line.err{ color: var(--err); }
+  .placeholder{ color: var(--mute); }
+</style>
+</head>
+<body>
+
+<header class="pw-header">
+  <a href="index.html#about" class="pw-logo">ProgramWise<span class="cursor"></span></a>
+  <ul class="pw-nav">
+    <li><a href="index.html#about">about</a></li>
+    <li><a href="index.html#license">license info</a></li>
+    <li><a href="learn-python.html">learn python</a></li>
+    <li><a href="python-web-interpreter.html" class="active">code runner</a></li>
+  </ul>
+</header>
+
+<div class="wrap">
+  <div class="titlebar">
+    <h1><span class="dot" id="statusDot"></span> Python Interpreter</h1>
+    <span class="status" id="statusText">Loading Python runtime…</span>
+  </div>
+
+  <textarea id="code" spellcheck="false">
+# Try some Python! Click "Run" or press Ctrl+Enter
+name = input("Enter your name: ")
+print(f"Hello, {name}!")
+
+import math
+print(f"Pi is approximately {math.pi:.4f}")
+
+for i in range(5):
+    print(f"Count: {i}")
+</textarea>
+
+  <div class="toolbar">
+    <button id="run" disabled>Run ▶</button>
+    <button id="clear">Clear output</button>
+    <span class="hint">Ctrl+Enter to run</span>
+  </div>
+
+  <pre id="output"><span class="placeholder">Output will appear here…</span></pre>
+</div>
+
+<script>
+  const outputEl = document.getElementById('output');
+  const runBtn = document.getElementById('run');
+  const clearBtn = document.getElementById('clear');
+  const statusDot = document.getElementById('statusDot');
+  const statusText = document.getElementById('statusText');
+
+  // Turn the plain textarea into a full syntax-highlighting editor.
+  const editor = CodeMirror.fromTextArea(document.getElementById('code'), {
+    mode: 'python',
+    theme: 'dracula',
+    lineNumbers: true,
+    indentUnit: 4,
+    tabSize: 4,
+    indentWithTabs: false,
+    smartIndent: true,          // auto-indent new lines (e.g. after a ':')
+    autoCloseBrackets: true,    // auto-close (), [], {}, '', ""
+    matchBrackets: true,        // highlight the matching bracket
+    styleActiveLine: true,
+    extraKeys: {
+      "Tab": function(cm) {
+        if (cm.somethingSelected()) cm.indentSelection("add");
+        else cm.replaceSelection("    ", "end");
+      },
+      "Shift-Tab": function(cm) { cm.indentSelection("subtract"); },
+      "Ctrl-Enter": function() { runCode(); },
+      "Cmd-Enter": function() { runCode(); }
+    }
+  });
+
+  let pyodide = null;
+
+  // Called from Python (see setup() below) so the dialog can show the
+  // actual message passed to input("...") instead of a blank prompt.
+  function jsPrompt(promptText) {
+    return window.prompt(promptText == null ? "" : String(promptText));
+  }
+
+  function appendOutput(text, isError) {
+    if (outputEl.querySelector('.placeholder')) outputEl.innerHTML = '';
+    const span = document.createElement('span');
+    span.className = 'out-line' + (isError ? ' err' : '');
+    span.textContent = text + '\n';
+    outputEl.appendChild(span);
+    outputEl.scrollTop = outputEl.scrollHeight;
+  }
+
+  function clearOutput() {
+    outputEl.innerHTML = '<span class="placeholder">Output will appear here…</span>';
+  }
+
+  async function setup() {
+    try {
+      pyodide = await loadPyodide();
+      pyodide.setStdout({ batched: (s) => appendOutput(s, false) });
+      pyodide.setStderr({ batched: (s) => appendOutput(s, true) });
+
+      // Fallback for code that reads sys.stdin directly (rare) — no
+      // message available at this level, so it shows a blank dialog.
+      pyodide.setStdin({ stdin: () => window.prompt() });
+
+      // The common path: input("some message") calls this, which passes
+      // the real message through to the browser dialog.
+      pyodide.globals.set('_js_prompt', jsPrompt);
+      pyodide.runPython(`
+import builtins as _builtins
+
+def _programwise_input(prompt=""):
+    result = _js_prompt(str(prompt))
+    if result is None:
+        raise EOFError("EOF when reading a line")
+    return result
+
+_builtins.input = _programwise_input
+del _programwise_input
+`);
+
+      statusDot.classList.add('ready');
+      statusText.textContent = 'Ready';
+      runBtn.disabled = false;
+    } catch (e) {
+      statusText.textContent = 'Failed to load Python runtime';
+      appendOutput('Startup error: ' + e, true);
+    }
+  }
+
+  async function runCode() {
+    if (!pyodide || runBtn.disabled) return;
+    runBtn.disabled = true;
+    statusText.textContent = 'Running…';
+    clearOutput();
+    const code = editor.getValue();
+    try {
+      await pyodide.loadPackagesFromImports(code);
+      const result = await pyodide.runPythonAsync(code);
+      if (result !== undefined) {
+        appendOutput('=> ' + result, false);
+      }
+    } catch (err) {
+      appendOutput(String(err), true);
+    } finally {
+      statusText.textContent = 'Ready';
+      runBtn.disabled = false;
+    }
+  }
+
+  runBtn.addEventListener('click', runCode);
+  clearBtn.addEventListener('click', clearOutput);
+
+  setup();
+</script>
+
+</body>
+</html>

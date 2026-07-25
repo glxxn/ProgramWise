@@ -1,0 +1,104 @@
+/* ============================================================
+   ProgramWise — shared brand tokens + header
+   Used by index.html and python-web-interpreter.html
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap');
+
+:root{
+  /* ink family — the "editor" the whole site lives inside */
+  --ink: #14161c;
+  --panel: #1b1e29;
+  --panel-raised: #21242f;
+  --line: #2b2f3d;
+
+  /* text */
+  --paper: #ece8df;   /* primary text — warm, page-like, against the cool ink bg */
+  --mute: #8b8fa3;    /* secondary text — muted, "comment" gray */
+
+  /* the two syntax accents that carry the whole brand */
+  --gold: #e3a53c;    /* keyword / def / primary actions */
+  --teal: #4B8BBE;    /* string / output / secondary actions */
+
+  --ok: #4ade80;
+  --err: #f87171;
+
+  --font-mono: 'IBM Plex Mono', 'Consolas', 'Menlo', monospace;
+  --font-sans: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+*{ box-sizing: border-box; }
+html{ scroll-behavior: smooth; }
+body{
+  margin:0;
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--font-sans);
+}
+
+/* ---------------- Header ---------------- */
+.pw-header{
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap: 20px;
+  padding: 16px 32px;
+  background: rgba(27,30,41,0.88);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+.pw-logo{
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 19px;
+  color: var(--paper);
+  text-decoration: none;
+  letter-spacing: -0.01em;
+  display:flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.pw-logo .cursor{
+  display:inline-block;
+  width: 8px;
+  height: 1.05em;
+  background: var(--gold);
+  margin-left: 5px;
+  animation: pw-blink 1.1s steps(1) infinite;
+}
+@keyframes pw-blink{ 50%{ opacity:0; } }
+
+.pw-nav{
+  display:flex;
+  align-items:center;
+  gap: 26px;
+  list-style:none;
+  margin:0;
+  padding:0;
+  flex-wrap: wrap;
+}
+.pw-nav a{
+  font-family: var(--font-mono);
+  font-size: 13.5px;
+  color: var(--mute);
+  text-decoration:none;
+  padding: 4px 1px 6px;
+  border-bottom: 2px solid transparent;
+  transition: color .15s ease, border-color .15s ease;
+}
+.pw-nav a:hover{ color: var(--paper); }
+.pw-nav a.active{ color: var(--gold); border-color: var(--gold); }
+
+@media (max-width: 720px){
+  .pw-header{ flex-direction:column; align-items:flex-start; gap:12px; padding:14px 20px; }
+  .pw-nav{ gap:16px; font-size:12.5px; }
+}
+
+@media (prefers-reduced-motion: reduce){
+  .pw-logo .cursor{ animation:none; opacity:1; }
+}
