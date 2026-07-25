@@ -182,7 +182,7 @@ for i in range(5):
     lineNumbers: true,
     indentUnit: 4,
     tabSize: 4,
-    indentWithTabs: false,
+    indentWithTabs: true,
     smartIndent: true,          // auto-indent new lines (e.g. after a ':')
     autoCloseBrackets: true,    // auto-close (), [], {}, '', ""
     matchBrackets: true,        // highlight the matching bracket
@@ -190,7 +190,7 @@ for i in range(5):
     extraKeys: {
       "Tab": function(cm) {
         if (cm.somethingSelected()) cm.indentSelection("add");
-        else cm.replaceSelection("    ", "end");
+        else cm.replaceSelection("\t", "end");
       },
       "Shift-Tab": function(cm) { cm.indentSelection("subtract"); },
       "Ctrl-Enter": function() { runCode(); },
