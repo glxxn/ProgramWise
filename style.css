@@ -35,6 +35,14 @@ body{
   color: var(--paper);
   font-family: var(--font-sans);
 }
+a {
+    color: var(--gold);
+    text-decoration: none;
+}
+  a:hover {
+    color: var(--teal);
+    text-decoration: underline;
+}
 
 /* ---------------- Header ---------------- */
 .pw-header{
@@ -85,10 +93,13 @@ body{
 .pw-nav .pw-nav-btn{
   font-family: var(--font-mono);
   font-size: 13.5px;
+  line-height: 1;              /* new */
   color: var(--mute);
   text-decoration:none;
   background: none;
   border: none;
+  display: inline-flex;        /* new */
+  align-items: center;         /* new */
   padding: 4px 1px 6px;
   border-bottom: 2px solid transparent;
   cursor: pointer;
