@@ -8,7 +8,7 @@
 **Domain:** https://www.programwise.online  
 
 **Contact Email (for SSL):** gleondsouzahere@gmail.com  
-**Video Explainer (available only to Murdoch members):**  [35862344_Project_Video_Explainer.mp4](https://murdochuniversity-my.sharepoint.com/:v:/g/personal/35862344_student_murdoch_edu_au/IQBHM9Aej48VS4uQQmevkpXBAdyTg99Kzxim1UVrdDrDW4Q?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=0JNFh8)
+**Video Explainer (available only to Murdoch members):**  [35862344_Project_Video_Explainer.mp4](https://murdochuniversity-my.sharepoint.com/:v:/g/personal/35862344_student_murdoch_edu_au/IQBHM9Aej48VS4uQQmevkpXBAdyTg99Kzxim1UVrdDrDW4Q?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=0JNFh8)  
 **TCO Presentation (IaaS vs SaaS):**  [35862344_Gleon_TCO_Presentation.pptx](https://murdochuniversity-my.sharepoint.com/:p:/g/personal/35862344_student_murdoch_edu_au/IQAnXbwrqQN_Tq8gfhshOmmwATO3PVSVZZKFrnh12E_rK7M?e=TaLQm6)
 
 ---
