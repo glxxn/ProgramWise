@@ -37,11 +37,11 @@ body{
 }
 a {
     color: var(--gold);
-    text-decoration: none;
+    text-decoration: bold;
 }
   a:hover {
     color: var(--teal);
-    text-decoration: underline;
+    text-decoration: bold underline;
 }
 
 /* ---------------- Header ---------------- */
