@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ProgramWise — Exception Handling</title>
+<link rel="stylesheet" href="../style.css" />
+<link rel="stylesheet" href="course.css" />
+</head>
+<body>
+
+<header class="pw-header">
+  <a href="../index.html#about" class="pw-logo">ProgramWise<span class="cursor"></span></a>
+  <ul class="pw-nav">
+    <li><a href="../index.html#about">about</a></li>
+    <li><a href="../learn-python.html" class="active">learn python</a></li>
+    <li><a href="../python-web-interpreter.html" target="_blank" rel="noopener noreferrer">code runner</a></li>
+    <li><button type="button" class="pw-nav-btn" data-modal-open="license-modal">license info</button></li>
+    <li><button type="button" class="pw-nav-btn" data-modal-open="tco-modal">TCO presentation</button></li>
+    <li><button type="button" class="pw-nav-btn" data-modal-open="contact-modal">contact</button></li>
+  </ul>
+</header>
+
+<div class="lp-layout">
+
+  <button type="button" class="lp-sidebar-toggle" id="sidebarToggle">☰ Sections</button>
+
+  <aside class="lp-sidebar" id="lpSidebar">
+    <nav id="courseNav"><!-- rendered by course.js from course-data.js --></nav>
+  </aside>
+
+  <main class="lp-content">
+<section class="lp-section" id="sec-exceptions">
+<h2>Exception Handling</h2>
+<p class="lp-section-desc">Catching problems that happen while a program is running, instead of letting them crash it.</p>
+<div class="lp-subsection" id="exc-types">
+<h3>Types of Errors</h3>
+<p>An exception is an error that occurs while a program is running, disrupting its normal flow. Python has many built-in exception types, each describing what specifically went wrong:</p>
+<ul>
+<li><code class="lp-inline">TypeError</code> — an operation was used on the wrong type of value</li>
+<li><code class="lp-inline">ValueError</code> — the right type was given, but with an invalid value</li>
+<li><code class="lp-inline">NameError</code> — a variable doesn't exist in the current scope</li>
+<li><code class="lp-inline">IndexError</code> — a sequence index is out of range</li>
+<li><code class="lp-inline">KeyError</code> — a dictionary key doesn't exist</li>
+<li><code class="lp-inline">ZeroDivisionError</code> — an attempt to divide by zero</li>
+<li><code class="lp-inline">FileNotFoundError</code> — a file that was expected to exist doesn't</li>
+</ul>
+<pre class="code-block">print(10 / 0)</pre>
+<div class="code-output">ZeroDivisionError: division by zero</div>
+<pre class="code-block">nums = [1, 2, 3]
+print(nums[5])</pre>
+<div class="code-output">IndexError: list index out of range</div>
+</div>
+<div class="lp-subsection" id="exc-try">
+<h3>Try-Except &amp; Finally</h3>
+<p>Code that might fail goes in a <code class="lp-inline">try</code> block; code that handles the failure goes in an <code class="lp-inline">except</code> block.</p>
+<pre class="code-block">try:
+    number = int(input("Enter a number: "))
+    print(10 / number)
+except:
+    print("Something went wrong.")</pre>
+<div class="code-output">Enter a number: 0
+Something went wrong.</div>
+<p>Catching every error the same way hides what actually happened, though. It's better to catch specific exception types so each one gets a clear, useful response:</p>
+<pre class="code-block">try:
+    number = int(input("Enter a number: "))
+    print(10 / number)
+except ValueError:
+    print("That wasn't a valid number.")
+except ZeroDivisionError:
+    print("Can't divide by zero.")</pre>
+<div class="code-output">Enter a number: 0
+Can't divide by zero.</div>
+<p>An optional <code class="lp-inline">else</code> block runs only if no exception was raised, and <code class="lp-inline">finally</code> always runs no matter what — commonly used for cleanup, like closing a file whether or not something went wrong.</p>
+<pre class="code-block">try:
+    number = int(input("Enter a number: "))
+    print(10 / number)
+except ZeroDivisionError:
+    print("Can't divide by zero.")
+else:
+    print("No errors occurred.")
+finally:
+    print("Done.")</pre>
+<div class="code-output">Enter a number: 5
+2.0
+No errors occurred.
+Done.</div>
+</div>
+</section>
+    <nav class="lp-topic-nav">
+      <a href="functions.html" class="prev"><span class="dir">&larr; Previous</span>Functions</a>
+      <a href="file-handling.html" class="next"><span class="dir">Next &rarr;</span>File Handling</a>
+    </nav>
+  </main>
+</div>
+
+<script src="../modals.js"></script>
+<script src="course-data.js"></script>
+<script src="course.js"></script>
+
+</body>
+</html>

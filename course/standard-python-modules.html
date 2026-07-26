@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ProgramWise — Standard Python Modules</title>
+<link rel="stylesheet" href="../style.css" />
+<link rel="stylesheet" href="course.css" />
+</head>
+<body>
+
+<header class="pw-header">
+  <a href="../index.html#about" class="pw-logo">ProgramWise<span class="cursor"></span></a>
+  <ul class="pw-nav">
+    <li><a href="../index.html#about">about</a></li>
+    <li><a href="../learn-python.html" class="active">learn python</a></li>
+    <li><a href="../python-web-interpreter.html" target="_blank" rel="noopener noreferrer">code runner</a></li>
+    <li><button type="button" class="pw-nav-btn" data-modal-open="license-modal">license info</button></li>
+    <li><button type="button" class="pw-nav-btn" data-modal-open="tco-modal">TCO presentation</button></li>
+    <li><button type="button" class="pw-nav-btn" data-modal-open="contact-modal">contact</button></li>
+  </ul>
+</header>
+
+<div class="lp-layout">
+
+  <button type="button" class="lp-sidebar-toggle" id="sidebarToggle">☰ Sections</button>
+
+  <aside class="lp-sidebar" id="lpSidebar">
+    <nav id="courseNav"><!-- rendered by course.js from course-data.js --></nav>
+  </aside>
+
+  <main class="lp-content">
+<section class="lp-section" id="sec-standard-modules"><h2>Standard Python Modules</h2><p class="lp-section-desc">A few of Python's built-in modules that ship with the language itself — no installation needed, just an import.</p><div class="lp-subsection" id="mod-math"><h3>Math Module</h3><p>Extra math functions beyond Python's built-in operators — import it first with <code class="lp-inline">import math</code>.</p><pre class="code-block">import math
+
+print(math.sqrt(144))
+print(math.ceil(4.1))
+print(math.floor(4.9))
+print(math.factorial(5))
+print(math.pi)</pre><div class="code-output">12.0
+5
+4
+120
+3.141592653589793</div><p><code class="lp-inline">sqrt()</code> finds a square root, <code class="lp-inline">ceil()</code>/<code class="lp-inline">floor()</code> round up or down to the nearest whole number, <code class="lp-inline">factorial()</code> computes n!, and <code class="lp-inline">pi</code> is a ready-made constant for π.</p></div><div class="lp-subsection" id="mod-random"><h3>Random Module</h3><p>Generates pseudo-random numbers and choices — import it with <code class="lp-inline">import random</code>.</p><pre class="code-block">import random
+
+print(random.random())
+print(random.randint(1, 10))
+print(random.choice(["a", "b", "c"]))
+
+nums = [1, 2, 3, 4]
+random.shuffle(nums)
+print(nums)</pre><div class="code-output">0.7334125841448089
+7
+b
+[3, 1, 4, 2]</div><p><code class="lp-inline">random()</code> gives a float between 0 and 1, <code class="lp-inline">randint(a, b)</code> gives a whole number between <code class="lp-inline">a</code> and <code class="lp-inline">b</code> inclusive, <code class="lp-inline">choice()</code> picks one item from a sequence, and <code class="lp-inline">shuffle()</code> rearranges a list in place. Since these are random, running the same code again will give different results.</p></div><div class="lp-subsection" id="mod-statistics"><h3>Statistics Module</h3><p>Common statistical calculations on a set of numbers — import it with <code class="lp-inline">import statistics</code>.</p><pre class="code-block">import statistics
+
+data = [4, 8, 15, 16, 23, 42]
+print(statistics.mean(data))
+print(statistics.median(data))
+print(statistics.mode([1, 1, 2, 3]))</pre><div class="code-output">18
+15.5
+1</div><p><code class="lp-inline">mean()</code> gives the average, <code class="lp-inline">median()</code> gives the middle value once sorted (averaging the two middle values when there's an even count), and <code class="lp-inline">mode()</code> gives whichever value appears most often.</p></div></section>
+    <nav class="lp-topic-nav">
+      <a href="file-handling.html" class="prev"><span class="dir">&larr; Previous</span>File Handling</a>
+      
+    </nav>
+  </main>
+</div>
+
+<script src="../modals.js"></script>
+<script src="course-data.js"></script>
+<script src="course.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ProgramWise — Functions</title>
+<link rel="stylesheet" href="../style.css" />
+<link rel="stylesheet" href="course.css" />
+</head>
+<body>
+
+<header class="pw-header">
+  <a href="../index.html#about" class="pw-logo">ProgramWise<span class="cursor"></span></a>
+  <ul class="pw-nav">
+    <li><a href="../index.html#about">about</a></li>
+    <li><a href="../learn-python.html" class="active">learn python</a></li>
+    <li><a href="../python-web-interpreter.html" target="_blank" rel="noopener noreferrer">code runner</a></li>
+    <li><button type="button" class="pw-nav-btn" data-modal-open="license-modal">license info</button></li>
+    <li><button type="button" class="pw-nav-btn" data-modal-open="tco-modal">TCO presentation</button></li>
+    <li><button type="button" class="pw-nav-btn" data-modal-open="contact-modal">contact</button></li>
+  </ul>
+</header>
+
+<div class="lp-layout">
+
+  <button type="button" class="lp-sidebar-toggle" id="sidebarToggle">☰ Sections</button>
+
+  <aside class="lp-sidebar" id="lpSidebar">
+    <nav id="courseNav"><!-- rendered by course.js from course-data.js --></nav>
+  </aside>
+
+  <main class="lp-content">
+<section class="lp-section" id="sec-functions">
+<h2>Functions</h2>
+<p class="lp-section-desc">Named, reusable blocks of code — write the logic once, run it as many times as you need.</p>
+<div class="lp-subsection" id="fn-basics">
+<h3>Basics</h3>
+<p>A function is a named block of code that does one job, which you can call from anywhere in your program instead of rewriting the same logic repeatedly. Define one with <code class="lp-inline">def</code>, a name, and parentheses (even if there's nothing inside them).</p>
+<pre class="code-block">def greet(name):
+    """Greets a person by name."""
+    print("Hello,", name)
+
+greet("ByteWise")</pre>
+<div class="code-output">Hello, ByteWise</div>
+<p>The text in triple quotes right under the <code class="lp-inline">def</code> line is called a <strong style="color:var(--paper)">docstring</strong> — a short note for other programmers (or future you) explaining what the function does.</p>
+</div>
+<div class="lp-subsection" id="fn-return">
+<h3>Return</h3>
+<p><code class="lp-inline">return</code> sends a value back to wherever the function was called, and immediately ends the function — any code written after it in that call won't run.</p>
+<pre class="code-block">def add(x, y):
+    return x + y
+
+result = add(4, 5)
+print(result)
+print(add(2, 3) + 10)</pre>
+<div class="code-output">9
+15</div>
+<p>A function with no <code class="lp-inline">return</code> statement still "returns" something — it just gives back <code class="lp-inline">None</code> by default. These are sometimes called void functions.</p>
+<pre class="code-block">def shout(msg):
+    print(msg.upper())
+
+output = shout("hi")
+print(output)</pre>
+<div class="code-output">HI
+None</div>
+</div>
+<div class="lp-subsection" id="fn-arguments">
+<h3>Arguments</h3>
+<p><strong style="color:var(--paper)">Positional arguments</strong> are matched to parameters by order — the first value goes to the first parameter, and so on.</p>
+<pre class="code-block">def describe(name, age):
+    print(name, "is", age, "years old")
+
+describe("ByteWise", 5)</pre>
+<div class="code-output">ByteWise is 5 years old</div>
+<p><strong style="color:var(--paper)">Default arguments</strong> give a parameter a fallback value, used only when the caller doesn't provide one. Defaults always have to come last in the function definition.</p>
+<pre class="code-block">def greet(name, greeting="Hello"):
+    print(greeting, name)
+
+greet("ByteWise")
+greet("ByteWise", "Hey")</pre>
+<div class="code-output">Hello ByteWise
+Hey ByteWise</div>
+<p><strong style="color:var(--paper)">Keyword arguments</strong> are passed by naming the parameter directly, so order stops mattering. If you mix the two, positional arguments have to come before keyword ones.</p>
+<pre class="code-block">def describe(name, age):
+    print(name, "is", age, "years old")
+
+describe(age=5, name="ByteWise")</pre>
+<div class="code-output">ByteWise is 5 years old</div>
+</div>
+<div class="lp-subsection" id="fn-scope">
+<h3>Scope</h3>
+<p>Scope determines where a variable name is visible. A <strong style="color:var(--paper)">global</strong> variable, declared outside any function, can be read from anywhere — including inside functions.</p>
+<pre class="code-block">x = 10
+
+def show():
+    print(x)
+
+show()</pre>
+<div class="code-output">10</div>
+<p>A <strong style="color:var(--paper)">local</strong> variable, declared inside a function, only exists while that function is running — it disappears once the function finishes, and can't be reached from outside it.</p>
+<pre class="code-block">def set_value():
+    y = 5
+    print(y)
+
+set_value()
+print(y)</pre>
+<div class="code-output">5
+NameError: name 'y' is not defined</div>
+<p>To actually create or modify a global variable from inside a function, use the <code class="lp-inline">global</code> keyword.</p>
+<pre class="code-block">def update():
+    global count
+    count = 1
+
+update()
+print(count)</pre>
+<div class="code-output">1</div>
+</div>
+</section>
+    <nav class="lp-topic-nav">
+      <a href="dictionaries.html" class="prev"><span class="dir">&larr; Previous</span>Dictionaries</a>
+      <a href="exception-handling.html" class="next"><span class="dir">Next &rarr;</span>Exception Handling</a>
+    </nav>
+  </main>
+</div>
+
+<script src="../modals.js"></script>
+<script src="course-data.js"></script>
+<script src="course.js"></script>
+
+</body>
+</html>

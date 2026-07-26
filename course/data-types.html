@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ProgramWise — Data Types</title>
+<link rel="stylesheet" href="../style.css" />
+<link rel="stylesheet" href="course.css" />
+</head>
+<body>
+
+<header class="pw-header">
+  <a href="../index.html#about" class="pw-logo">ProgramWise<span class="cursor"></span></a>
+  <ul class="pw-nav">
+    <li><a href="../index.html#about">about</a></li>
+    <li><a href="../learn-python.html" class="active">learn python</a></li>
+    <li><a href="../python-web-interpreter.html" target="_blank" rel="noopener noreferrer">code runner</a></li>
+    <li><button type="button" class="pw-nav-btn" data-modal-open="license-modal">license info</button></li>
+    <li><button type="button" class="pw-nav-btn" data-modal-open="tco-modal">TCO presentation</button></li>
+    <li><button type="button" class="pw-nav-btn" data-modal-open="contact-modal">contact</button></li>
+  </ul>
+</header>
+
+<div class="lp-layout">
+
+  <button type="button" class="lp-sidebar-toggle" id="sidebarToggle">☰ Sections</button>
+
+  <aside class="lp-sidebar" id="lpSidebar">
+    <nav id="courseNav"><!-- rendered by course.js from course-data.js --></nav>
+  </aside>
+
+  <main class="lp-content">
+<section class="lp-section" id="sec-data-types">
+<h2>Data Types</h2>
+<p class="lp-section-desc">Every value in Python has a type, and those types fall into a few natural families.</p>
+<div class="lp-subsection" id="dt-intro">
+<h3>Introduction</h3>
+<p>Python's built-in types split into three broad groups: <strong style="color:var(--paper)">numbers</strong> (int, float, bool, complex), <strong style="color:var(--paper)">sequences</strong> — ordered collections that support indexing and slicing (str, list, tuple) — and <strong style="color:var(--paper)">mappings</strong> — collections accessed by key instead of position (dict).</p>
+<ul>
+<li><code class="lp-inline">int</code> — whole numbers, positive or negative, with no fixed size limit</li>
+<li><code class="lp-inline">float</code> — numbers with a decimal point, or written in exponential form (<code class="lp-inline">3.5e-2</code>)</li>
+<li><code class="lp-inline">bool</code> — <code class="lp-inline">True</code> or <code class="lp-inline">False</code>; internally treated as 1 and 0</li>
+<li><code class="lp-inline">str</code> — text, a sequence of characters</li>
+<li><code class="lp-inline">list</code> — an ordered, mutable collection, written with <code class="lp-inline">[ ]</code></li>
+<li><code class="lp-inline">tuple</code> — an ordered, immutable collection, written with <code class="lp-inline">( )</code></li>
+<li><code class="lp-inline">dict</code> — key-value pairs, written with <code class="lp-inline">{ }</code></li>
+</ul>
+<pre class="code-block">print(type(42))
+print(type(3.14))
+print(type(True))
+print(type("hello"))
+print(type([1, 2, 3]))</pre>
+<div class="code-output">&lt;class 'int'&gt;
+&lt;class 'float'&gt;
+&lt;class 'bool'&gt;
+&lt;class 'str'&gt;
+&lt;class 'list'&gt;</div>
+</div>
+<div class="lp-subsection" id="dt-mutable">
+<h3>Mutable</h3>
+<p>Mutable types can be changed in place — modifying them updates the existing object instead of creating a new one. Lists, dictionaries, and sets are all mutable.</p>
+<pre class="code-block">scores = [10, 20, 30]
+scores[0] = 99
+print(scores)
+
+profile = {"name": "Bytewise"}
+profile["name"] = "ProgramWise"
+print(profile)</pre>
+<div class="code-output">[99, 20, 30]
+{'name': 'ProgramWise'}</div>
+</div>
+<div class="lp-subsection" id="dt-immutable">
+<h3>Immutable</h3>
+<p>Immutable types can never be changed in place — any "change" actually builds a brand new object. <code class="lp-inline">int</code>, <code class="lp-inline">float</code>, <code class="lp-inline">bool</code>, <code class="lp-inline">str</code>, and <code class="lp-inline">tuple</code> all work this way.</p>
+<pre class="code-block">name = "Byte"
+name[0] = "b"</pre>
+<div class="code-output">TypeError: 'str' object does not support item assignment</div>
+<p>The same happens with tuples — you can build a new tuple, but you can't modify one that already exists:</p>
+<pre class="code-block">point = (1, 2, 4)
+point[0] = 9</pre>
+<div class="code-output">TypeError: 'tuple' object does not support item assignment</div>
+</div>
+<div class="lp-subsection" id="dt-casting">
+<h3>Type Casting</h3>
+<p>Type casting converts a value from one type to another. Python does this two ways: <strong style="color:var(--paper)">implicitly</strong>, on its own during a calculation, or <strong style="color:var(--paper)">explicitly</strong>, when you call a conversion function yourself.</p>
+<pre class="code-block">print(3 + 6.9)
+print(True + 1)</pre>
+<div class="code-output">9.9
+2</div>
+<p>In the first line, <code class="lp-inline">3</code> is silently converted to a float before the addition happens. In the second, <code class="lp-inline">True</code> is treated as the integer <code class="lp-inline">1</code>.</p>
+<pre class="code-block">print(int("10"))
+print(float("1.23"))
+print(str(99))</pre>
+<div class="code-output">10
+1.23
+99</div>
+<p>Explicit conversions can fail, though — a string only converts to <code class="lp-inline">int</code> if it looks like a whole number:</p>
+<pre class="code-block">print(int("10.5"))</pre>
+<div class="code-output">ValueError: invalid literal for int() with base 10: '10.5'</div>
+</div>
+</section>
+    <nav class="lp-topic-nav">
+      <a href="basics.html" class="prev"><span class="dir">&larr; Previous</span>Basics</a>
+      <a href="conditional.html" class="next"><span class="dir">Next &rarr;</span>Conditionals</a>
+    </nav>
+  </main>
+</div>
+
+<script src="../modals.js"></script>
+<script src="course-data.js"></script>
+<script src="course.js"></script>
+
+</body>
+</html>

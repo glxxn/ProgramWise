@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ProgramWise — File Handling</title>
+<link rel="stylesheet" href="../style.css" />
+<link rel="stylesheet" href="course.css" />
+</head>
+<body>
+
+<header class="pw-header">
+  <a href="../index.html#about" class="pw-logo">ProgramWise<span class="cursor"></span></a>
+  <ul class="pw-nav">
+    <li><a href="../index.html#about">about</a></li>
+    <li><a href="../learn-python.html" class="active">learn python</a></li>
+    <li><a href="../python-web-interpreter.html" target="_blank" rel="noopener noreferrer">code runner</a></li>
+    <li><button type="button" class="pw-nav-btn" data-modal-open="license-modal">license info</button></li>
+    <li><button type="button" class="pw-nav-btn" data-modal-open="tco-modal">TCO presentation</button></li>
+    <li><button type="button" class="pw-nav-btn" data-modal-open="contact-modal">contact</button></li>
+  </ul>
+</header>
+
+<div class="lp-layout">
+
+  <button type="button" class="lp-sidebar-toggle" id="sidebarToggle">☰ Sections</button>
+
+  <aside class="lp-sidebar" id="lpSidebar">
+    <nav id="courseNav"><!-- rendered by course.js from course-data.js --></nav>
+  </aside>
+
+  <main class="lp-content">
+<section class="lp-section" id="sec-file-handling">
+<h2>File Handling</h2>
+<p class="lp-section-desc">Reading and writing files from Python — plain text, structured binary data, and spreadsheet-style CSV.</p>
+<div class="lp-subsection" id="fh-basics">
+<h3>Basics (Opening &amp; Closing, File Modes)</h3>
+<p>Files are opened with <code class="lp-inline">open(filename, mode)</code>, which gives you back a file object to read or write through. The mode tells Python what you intend to do:</p>
+<ul>
+<li><code class="lp-inline">"r"</code> — read (the default); raises <code class="lp-inline">FileNotFoundError</code> if the file doesn't exist</li>
+<li><code class="lp-inline">"w"</code> — write; creates the file if needed, and erases any existing content first</li>
+<li><code class="lp-inline">"a"</code> — append; creates the file if needed, and adds new content after whatever's already there</li>
+</ul>
+<pre class="code-block">f = open("notes.txt", "r")
+data = f.read()
+f.close()
+print(data)</pre>
+<p>Closing a file with <code class="lp-inline">close()</code> matters — Python buffers what you write and doesn't always save it to disk immediately, so forgetting to close a file can mean losing data.</p>
+</div>
+<div class="lp-subsection" id="fh-with">
+<h3>With Clause</h3>
+<p><code class="lp-inline">with open(...) as f:</code> closes the file automatically once the block finishes — even if an error happens partway through — so you don't have to remember to call <code class="lp-inline">close()</code> yourself.</p>
+<pre class="code-block">with open("notes.txt", "r") as f:
+    data = f.read()
+
+print(data)</pre>
+<p>This is the recommended way to work with files for exactly that reason: it's safer, and one line shorter.</p>
+</div>
+<div class="lp-subsection" id="fh-text">
+<h3>Text Files</h3>
+<p>For reading, <code class="lp-inline">read()</code> grabs the whole file as one string, <code class="lp-inline">readline()</code> grabs just the next line, and <code class="lp-inline">readlines()</code> returns every line as a list of strings.</p>
+<pre class="code-block">with open("notes.txt", "r") as f:
+    print(f.readlines())</pre>
+<div class="code-output">['First line\n', 'Second line\n']</div>
+<p>For writing, <code class="lp-inline">write()</code> writes a single string, and <code class="lp-inline">writelines()</code> writes a list of strings all at once. Remember that <code class="lp-inline">"w"</code> mode erases the file first — use <code class="lp-inline">"a"</code> if you want to add on to what's already there instead.</p>
+<pre class="code-block">with open("notes.txt", "w") as f:
+    f.write("First line\n")
+    f.write("Second line\n")</pre>
+</div>
+<div class="lp-subsection" id="fh-pointers">
+<h3>File Pointers</h3>
+<p>Every open file has a pointer marking where the next read or write will happen. <code class="lp-inline">tell()</code> reports its current position, and <code class="lp-inline">seek(offset)</code> moves it.</p>
+<pre class="code-block">with open("notes.txt", "r") as f:
+    f.read(5)
+    print(f.tell())
+    f.seek(0)
+    print(f.read(5))</pre>
+<div class="code-output">5
+First</div>
+</div>
+<div class="lp-subsection" id="fh-binary">
+<h3>Binary Files &amp; Pickle</h3>
+<p>Binary files store raw bytes instead of text, so the regular <code class="lp-inline">read()</code>/<code class="lp-inline">write()</code> functions don't work on Python objects directly. The <code class="lp-inline">pickle</code> module bridges that gap — it serializes objects like lists and dictionaries into bytes to write, and deserializes them back when reading. File modes need a <code class="lp-inline">"b"</code>, e.g. <code class="lp-inline">"wb"</code> or <code class="lp-inline">"rb"</code>.</p>
+<pre class="code-block">import pickle
+
+data = ["ByteWise", "on", "top"]
+with open("data.dat", "wb") as f:
+    pickle.dump(data, f)</pre>
+<pre class="code-block">import pickle
+
+with open("data.dat", "rb") as f:
+    loaded = pickle.load(f)
+
+print(loaded)</pre>
+<div class="code-output">['ByteWise', 'on', 'top']</div>
+<p>Trying to <code class="lp-inline">load()</code> past the last object saved raises an <code class="lp-inline">EOFError</code>, so files with multiple saved objects are usually read in a loop wrapped in a <code class="lp-inline">try</code>/<code class="lp-inline">except</code>.</p>
+</div>
+<div class="lp-subsection" id="fh-csv">
+<h3>CSV Files</h3>
+<p>CSV (Comma-Separated Values) files store tabular data as plain text, with a comma separating each field by default. The <code class="lp-inline">csv</code> module provides a writer and a reader object to handle the formatting for you.</p>
+<pre class="code-block">import csv
+
+with open("people.csv", "w", newline="") as f:
+    writer = csv.writer(f)
+    writer.writerow(["Name", "Age"])
+    writer.writerow(["ByteWise", 5])</pre>
+<pre class="code-block">import csv
+
+with open("people.csv", "r") as f:
+    reader = csv.reader(f)
+    for row in reader:
+        print(row)</pre>
+<div class="code-output">['Name', 'Age']
+['ByteWise', '5']</div>
+<p>Notice everything comes back as a string, even the age — convert it with <code class="lp-inline">int()</code> or <code class="lp-inline">float()</code> if you need to do math with it.</p>
+</div>
+</section>
+    <nav class="lp-topic-nav">
+      <a href="exception-handling.html" class="prev"><span class="dir">&larr; Previous</span>Exception Handling</a>
+      <a href="standard-python-modules.html" class="next"><span class="dir">Next &rarr;</span>Standard Python Modules</a>
+    </nav>
+  </main>
+</div>
+
+<script src="../modals.js"></script>
+<script src="course-data.js"></script>
+<script src="course.js"></script>
+
+</body>
+</html>

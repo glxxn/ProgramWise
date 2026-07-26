@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ProgramWise — Dictionaries</title>
+<link rel="stylesheet" href="../style.css" />
+<link rel="stylesheet" href="course.css" />
+</head>
+<body>
+
+<header class="pw-header">
+  <a href="../index.html#about" class="pw-logo">ProgramWise<span class="cursor"></span></a>
+  <ul class="pw-nav">
+    <li><a href="../index.html#about">about</a></li>
+    <li><a href="../learn-python.html" class="active">learn python</a></li>
+    <li><a href="../python-web-interpreter.html" target="_blank" rel="noopener noreferrer">code runner</a></li>
+    <li><button type="button" class="pw-nav-btn" data-modal-open="license-modal">license info</button></li>
+    <li><button type="button" class="pw-nav-btn" data-modal-open="tco-modal">TCO presentation</button></li>
+    <li><button type="button" class="pw-nav-btn" data-modal-open="contact-modal">contact</button></li>
+  </ul>
+</header>
+
+<div class="lp-layout">
+
+  <button type="button" class="lp-sidebar-toggle" id="sidebarToggle">☰ Sections</button>
+
+  <aside class="lp-sidebar" id="lpSidebar">
+    <nav id="courseNav"><!-- rendered by course.js from course-data.js --></nav>
+  </aside>
+
+  <main class="lp-content">
+<section class="lp-section" id="sec-dict">
+<h2>Dictionaries</h2>
+<p class="lp-section-desc">A mutable collection of key-value pairs — instead of a position, every value is reached by its own key.</p>
+<div class="lp-subsection" id="dict-intro">
+<h3>Introduction</h3>
+<p>A dictionary stores data as key-value pairs, written with curly braces. Keys must be an immutable type (like a string, number, or tuple); values can be anything.</p>
+<pre class="code-block">d = {"name": "ByteWise", "grade": 11, "age": 17}
+print(d)</pre>
+<div class="code-output">{'name': 'ByteWise', 'grade': 11, 'age': 17}</div>
+<p>You can also build one with the <code class="lp-inline">dict()</code> function:</p>
+<pre class="code-block">d = dict(name="ByteWise", grade=11)
+print(d)</pre>
+<div class="code-output">{'name': 'ByteWise', 'grade': 11}</div>
+</div>
+<div class="lp-subsection" id="dict-access">
+<h3>Accessing Elements</h3>
+<p>Values are reached by key, not by position — dictionaries aren't ordered sequences, so there's no index to use.</p>
+<pre class="code-block">d = {"name": "ByteWise", "grade": 11}
+print(d["name"])</pre>
+<div class="code-output">ByteWise</div>
+<p>Asking for a key that doesn't exist raises a <code class="lp-inline">KeyError</code>:</p>
+<pre class="code-block">print(d["age"])</pre>
+<div class="code-output">KeyError: 'age'</div>
+<p><code class="lp-inline">keys()</code>, <code class="lp-inline">values()</code>, and <code class="lp-inline">items()</code> give you the keys, the values, or both paired together — handy for looping.</p>
+<pre class="code-block">d = {"name": "ByteWise", "grade": 11}
+for key, value in d.items():
+    print(key, "-&gt;", value)</pre>
+<div class="code-output">name -&gt; ByteWise
+grade -&gt; 11</div>
+<p>Assigning to a new key adds it; assigning to an existing key updates it.</p>
+<pre class="code-block">d = {"name": "ByteWise", "grade": 11}
+d["age"] = 17      # adds a new key
+d["grade"] = 12    # updates an existing key
+print(d)</pre>
+<div class="code-output">{'name': 'ByteWise', 'grade': 12, 'age': 17}</div>
+<p><code class="lp-inline">in</code> checks whether a key exists (not a value) by default:</p>
+<pre class="code-block">d = {"name": "ByteWise", "grade": 11}
+print("name" in d)
+print("ByteWise" in d.values())</pre>
+<div class="code-output">True
+True</div>
+</div>
+<div class="lp-subsection" id="dict-methods">
+<h3>Methods</h3>
+<p><code class="lp-inline">get()</code> is a safer alternative to <code class="lp-inline">d[key]</code> — instead of raising an error for a missing key, it returns <code class="lp-inline">None</code>, or a fallback value you provide.</p>
+<pre class="code-block">d = {"name": "ByteWise"}
+print(d.get("age"))
+print(d.get("age", "not set"))</pre>
+<div class="code-output">None
+not set</div>
+<p><code class="lp-inline">pop()</code> removes a key and returns its value; <code class="lp-inline">popitem()</code> removes and returns the last key-value pair as a tuple; <code class="lp-inline">clear()</code> empties the dictionary entirely.</p>
+<pre class="code-block">d = {"name": "ByteWise", "grade": 11, "age": 17}
+print(d.pop("age"))
+print(d.popitem())
+print(d)</pre>
+<div class="code-output">17
+('grade', 11)
+{'name': 'ByteWise'}</div>
+<p><code class="lp-inline">update()</code> merges another dictionary in, overwriting any keys that already exist.</p>
+<pre class="code-block">d = {"name": "ByteWise", "grade": 11}
+d.update({"grade": 12, "age": 17})
+print(d)</pre>
+<div class="code-output">{'name': 'ByteWise', 'grade': 12, 'age': 17}</div>
+<p>Just like lists, assigning with <code class="lp-inline">d2 = d1</code> doesn't copy anything — both names share the same dictionary. Use <code class="lp-inline">copy()</code> for an actual duplicate.</p>
+<pre class="code-block">d1 = {"a": 1}
+d2 = d1
+d3 = d1.copy()
+
+d1["a"] = 99
+print(d2)
+print(d3)</pre>
+<div class="code-output">{'a': 99}
+{'a': 1}</div>
+<p><code class="lp-inline">setdefault()</code> adds a key only if it isn't already there — if it exists, it just returns the current value without changing anything.</p>
+<pre class="code-block">d = {"a": 100}
+d.setdefault("a", 999)   # 'a' already exists, unchanged
+d.setdefault("b", 200)   # 'b' is new, gets added
+print(d)</pre>
+<div class="code-output">{'a': 100, 'b': 200}</div>
+</div>
+</section>
+    <nav class="lp-topic-nav">
+      <a href="tuples.html" class="prev"><span class="dir">&larr; Previous</span>Tuples</a>
+      <a href="functions.html" class="next"><span class="dir">Next &rarr;</span>Functions</a>
+    </nav>
+  </main>
+</div>
+
+<script src="../modals.js"></script>
+<script src="course-data.js"></script>
+<script src="course.js"></script>
+
+</body>
+</html>

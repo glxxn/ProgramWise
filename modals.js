@@ -13,7 +13,13 @@
 (function () {
 
   function injectSharedModals() {
-    return fetch('modals.html')
+    // Resolve modals.html relative to this script's own location (not the
+    // page's location), so the same modals.js works whether it's included
+    // as "modals.js" from the site root or "../modals.js" from /course.
+    const scriptEl = document.currentScript;
+    const base = scriptEl ? scriptEl.src.replace(/[^/]*$/, '') : '';
+
+    return fetch(base + 'modals.html')
       .then(function (res) {
         if (!res.ok) throw new Error('modals.html responded with ' + res.status);
         return res.text();

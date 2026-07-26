@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ProgramWise — Tuples</title>
+<link rel="stylesheet" href="../style.css" />
+<link rel="stylesheet" href="course.css" />
+</head>
+<body>
+
+<header class="pw-header">
+  <a href="../index.html#about" class="pw-logo">ProgramWise<span class="cursor"></span></a>
+  <ul class="pw-nav">
+    <li><a href="../index.html#about">about</a></li>
+    <li><a href="../learn-python.html" class="active">learn python</a></li>
+    <li><a href="../python-web-interpreter.html" target="_blank" rel="noopener noreferrer">code runner</a></li>
+    <li><button type="button" class="pw-nav-btn" data-modal-open="license-modal">license info</button></li>
+    <li><button type="button" class="pw-nav-btn" data-modal-open="tco-modal">TCO presentation</button></li>
+    <li><button type="button" class="pw-nav-btn" data-modal-open="contact-modal">contact</button></li>
+  </ul>
+</header>
+
+<div class="lp-layout">
+
+  <button type="button" class="lp-sidebar-toggle" id="sidebarToggle">☰ Sections</button>
+
+  <aside class="lp-sidebar" id="lpSidebar">
+    <nav id="courseNav"><!-- rendered by course.js from course-data.js --></nav>
+  </aside>
+
+  <main class="lp-content">
+<section class="lp-section" id="sec-tuples">
+<h2>Tuples</h2>
+<p class="lp-section-desc">Like a list, but locked — once built, a tuple's contents can't be changed.</p>
+<div class="lp-subsection" id="tup-intro">
+<h3>Introduction</h3>
+<p>A tuple is an ordered collection written with round brackets. It behaves like a list in almost every way, except it's immutable — once created, its contents can't change.</p>
+<pre class="code-block">t = (1, "two", 3.0)
+print(t)</pre>
+<div class="code-output">(1, 'two', 3.0)</div>
+<p>A single-element tuple needs a trailing comma, or Python just treats the parentheses as grouping, not a tuple:</p>
+<pre class="code-block">not_a_tuple = (5)
+is_a_tuple = (5,)
+print(type(not_a_tuple))
+print(type(is_a_tuple))</pre>
+<div class="code-output">&lt;class 'int'&gt;
+&lt;class 'tuple'&gt;</div>
+<p>You can also build one from another sequence with <code class="lp-inline">tuple()</code>:</p>
+<pre class="code-block">print(tuple("abc"))
+print(tuple([1, 2, 3]))</pre>
+<div class="code-output">('a', 'b', 'c')
+(1, 2, 3)</div>
+</div>
+<div class="lp-subsection" id="tup-indexing">
+<h3>Indexing &amp; Slicing</h3>
+<p>Indexing and slicing work exactly like lists and strings — but since tuples are immutable, you can read from an index, not assign to it.</p>
+<pre class="code-block">t = ('b', 'y', 't', 'e')
+print(t[0])
+print(t[-1])
+print(t[1:3])</pre>
+<div class="code-output">b
+e
+('y', 't')</div>
+<pre class="code-block">t[0] = 'B'</pre>
+<div class="code-output">TypeError: 'tuple' object does not support item assignment</div>
+</div>
+<div class="lp-subsection" id="tup-operators">
+<h3>Operators</h3>
+<p><strong style="color:var(--paper)">+</strong> joins two tuples, and <strong style="color:var(--paper)">*</strong> repeats one. To add a single value, remember it needs the trailing comma to count as a tuple.</p>
+<pre class="code-block">t1 = (1, 2)
+t2 = (3, 4)
+print(t1 + t2)
+print(t1 * 2)
+print(t1 + (5,))</pre>
+<div class="code-output">(1, 2, 3, 4)
+(1, 2, 1, 2)
+(1, 2, 5)</div>
+<p><strong style="color:var(--paper)">in / not in</strong> and <strong style="color:var(--paper)">comparisons</strong> work the same way they do for lists — comparing element by element until one pair differs.</p>
+<pre class="code-block">print(3 in (1, 2, 3))
+print((1, 2, 9) &gt; (1, 2, 5))</pre>
+<div class="code-output">True
+True</div>
+</div>
+<div class="lp-subsection" id="tup-methods">
+<h3>Methods</h3>
+<p>Because tuples can't be modified, there are only two methods — everything else that "changes" a tuple has to build a new one instead.</p>
+<p><code class="lp-inline">count()</code> returns how many times a value appears, and <code class="lp-inline">index()</code> returns the position of its first occurrence.</p>
+<pre class="code-block">t = (2, 4, 2, 6, 2, 8)
+print(t.count(2))
+print(t.index(6))</pre>
+<div class="code-output">3
+3</div>
+<p>One handy related trick is <strong style="color:var(--paper)">unpacking</strong> — assigning a tuple's values straight into separate variables in one line.</p>
+<pre class="code-block">point = (3, 7)
+x, y = point
+print(x, y)</pre>
+<div class="code-output">3 7</div>
+</div>
+</section>
+    <nav class="lp-topic-nav">
+      <a href="lists.html" class="prev"><span class="dir">&larr; Previous</span>List</a>
+      <a href="dictionaries.html" class="next"><span class="dir">Next &rarr;</span>Dictionaries</a>
+    </nav>
+  </main>
+</div>
+
+<script src="../modals.js"></script>
+<script src="course-data.js"></script>
+<script src="course.js"></script>
+
+</body>
+</html>

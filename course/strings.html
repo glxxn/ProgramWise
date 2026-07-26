@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ProgramWise — Strings</title>
+<link rel="stylesheet" href="../style.css" />
+<link rel="stylesheet" href="course.css" />
+</head>
+<body>
+
+<header class="pw-header">
+  <a href="../index.html#about" class="pw-logo">ProgramWise<span class="cursor"></span></a>
+  <ul class="pw-nav">
+    <li><a href="../index.html#about">about</a></li>
+    <li><a href="../learn-python.html" class="active">learn python</a></li>
+    <li><a href="../python-web-interpreter.html" target="_blank" rel="noopener noreferrer">code runner</a></li>
+    <li><button type="button" class="pw-nav-btn" data-modal-open="license-modal">license info</button></li>
+    <li><button type="button" class="pw-nav-btn" data-modal-open="tco-modal">TCO presentation</button></li>
+    <li><button type="button" class="pw-nav-btn" data-modal-open="contact-modal">contact</button></li>
+  </ul>
+</header>
+
+<div class="lp-layout">
+
+  <button type="button" class="lp-sidebar-toggle" id="sidebarToggle">☰ Sections</button>
+
+  <aside class="lp-sidebar" id="lpSidebar">
+    <nav id="courseNav"><!-- rendered by course.js from course-data.js --></nav>
+  </aside>
+
+  <main class="lp-content">
+<section class="lp-section" id="sec-strings">
+<h2>Strings</h2>
+<p class="lp-section-desc">Text in Python — how to create it, reach into it, combine it, and reshape it.</p>
+<div class="lp-subsection" id="str-intro">
+<h3>Introduction</h3>
+<p>A string is a sequence of characters, created by wrapping text in single quotes, double quotes, or triple quotes. Triple quotes are the only way to let a string span multiple lines naturally.</p>
+<pre class="code-block">s1 = 'ByteWise'
+s2 = "ByteWise"
+s3 = """Line one
+Line two"""
+print(s3)</pre>
+<div class="code-output">Line one
+Line two</div>
+<p>Strings also support escape sequences — a backslash followed by a character that means something special, like <code class="lp-inline">\n</code> for a newline or <code class="lp-inline">\t</code> for a tab.</p>
+<pre class="code-block">print("Byte\nWise")
+print("Byte\tWise")
+print("She said \"hi\"")</pre>
+<div class="code-output">Byte
+Wise
+Byte    Wise
+She said "hi"</div>
+<p>Strings are immutable — like every other sequence type, <code class="lp-inline">len()</code> tells you how many characters it has, but you can't reassign a single character in place (more on that in Methods).</p>
+<pre class="code-block">print(len("ByteWise"))</pre>
+<div class="code-output">8</div>
+</div>
+<div class="lp-subsection" id="str-indexing">
+<h3>Indexing &amp; Slicing</h3>
+<p>Each character has a position, or index, starting at 0 from the left. Negative indices count backward from the end, starting at -1.</p>
+<pre class="code-block">s = "ByteWise"
+print(s[0])
+print(s[-1])
+print(s[3])</pre>
+<div class="code-output">B
+e
+e</div>
+<p>Asking for an index that doesn't exist raises an <code class="lp-inline">IndexError</code>:</p>
+<pre class="code-block">print(s[20])</pre>
+<div class="code-output">IndexError: string index out of range</div>
+<p>Slicing pulls out a whole chunk with <code class="lp-inline">s[start:stop:step]</code>. The stop index is never included, and every part is optional.</p>
+<pre class="code-block">s = "ByteWise"
+print(s[0:4])
+print(s[2:])
+print(s[:5])
+print(s[::-1])</pre>
+<div class="code-output">Byte
+teWise
+ByteW
+esiWetyB</div>
+<p>Slicing out of bounds doesn't raise an error — it just returns as much as exists, even an empty string:</p>
+<pre class="code-block">print("Byte"[10:20])</pre>
+<div class="code-output"></div>
+</div>
+<div class="lp-subsection" id="str-operators">
+<h3>Operators</h3>
+<p><strong style="color:var(--paper)">Concatenation (+)</strong> joins two strings together. Only strings can be added to strings — mixing in a number raises a <code class="lp-inline">TypeError</code>.</p>
+<pre class="code-block">print("Byte" + "Wise")
+print("Byte" + 5)</pre>
+<div class="code-output">ByteWise
+TypeError: can only concatenate str (not "int") to str</div>
+<p><strong style="color:var(--paper)">Replication (*)</strong> repeats a string a number of times.</p>
+<pre class="code-block">print("re" * 3)</pre>
+<div class="code-output">rererere</div>
+<p><strong style="color:var(--paper)">Membership (in / not in)</strong> checks whether one string appears inside another.</p>
+<pre class="code-block">print("Byte" in "ByteWise")
+print("byte" not in "ByteWise")</pre>
+<div class="code-output">True
+True</div>
+<p><strong style="color:var(--paper)">Comparison</strong> operators compare strings character by character using their underlying character codes, not their length.</p>
+<pre class="code-block">print("a" &gt; "z")
+print("Bro" &lt; "x")</pre>
+<div class="code-output">False
+True</div>
+</div>
+<div class="lp-subsection" id="str-methods">
+<h3>Methods</h3>
+<p>String methods are called with <code class="lp-inline">string.method()</code>. None of them modify the original string — since strings are immutable, they always return a new one.</p>
+<p><strong style="color:var(--paper)">Case methods</strong> — <code class="lp-inline">upper()</code>, <code class="lp-inline">lower()</code>, <code class="lp-inline">capitalize()</code>, and <code class="lp-inline">title()</code> change letter casing.</p>
+<pre class="code-block">print("bytewise".upper())
+print("BYTEWISE".lower())
+print("hello there".title())</pre>
+<div class="code-output">BYTEWISE
+bytewise
+Hello There</div>
+<p><strong style="color:var(--paper)">Checks</strong> — methods like <code class="lp-inline">isalpha()</code>, <code class="lp-inline">isdigit()</code>, and <code class="lp-inline">isalnum()</code> return a bool describing what's in the string.</p>
+<pre class="code-block">print("Johan".isalpha())
+print("12345".isdigit())
+print("Byte123".isalnum())</pre>
+<div class="code-output">True
+True
+True</div>
+<p><strong style="color:var(--paper)">Cleaning &amp; splitting</strong> — <code class="lp-inline">strip()</code> removes leading/trailing whitespace, <code class="lp-inline">split()</code> breaks a string into a list of pieces, and <code class="lp-inline">join()</code> does the reverse.</p>
+<pre class="code-block">print("  tidy me  ".strip())
+print("one two three".split())
+print("-".join(["a", "b", "c"]))</pre>
+<div class="code-output">tidy me
+['one', 'two', 'three']
+a-b-c</div>
+<p><strong style="color:var(--paper)">Searching &amp; replacing</strong> — <code class="lp-inline">find()</code> returns the first index of a substring (or -1 if missing), <code class="lp-inline">count()</code> tallies occurrences, and <code class="lp-inline">replace()</code> swaps text out.</p>
+<pre class="code-block">print("ByteWise".find("e"))
+print("abracadabra".count("ab"))
+print("Bytevise".replace("v", "W"))</pre>
+<div class="code-output">3
+2
+ByteWise</div>
+<p><strong style="color:var(--paper)">startswith()</strong> and <strong style="color:var(--paper)">endswith()</strong> check the beginning or end of a string and return a bool.</p>
+<pre class="code-block">print("ByteWise".startswith("Byte"))
+print("ByteWise".endswith("Wise"))</pre>
+<div class="code-output">True
+True</div>
+</div>
+</section>
+    <nav class="lp-topic-nav">
+      <a href="looping.html" class="prev"><span class="dir">&larr; Previous</span>Loops</a>
+      <a href="lists.html" class="next"><span class="dir">Next &rarr;</span>List</a>
+    </nav>
+  </main>
+</div>
+
+<script src="../modals.js"></script>
+<script src="course-data.js"></script>
+<script src="course.js"></script>
+
+</body>
+</html>

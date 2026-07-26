@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ProgramWise — Conditionals</title>
+<link rel="stylesheet" href="../style.css" />
+<link rel="stylesheet" href="course.css" />
+</head>
+<body>
+
+<header class="pw-header">
+  <a href="../index.html#about" class="pw-logo">ProgramWise<span class="cursor"></span></a>
+  <ul class="pw-nav">
+    <li><a href="../index.html#about">about</a></li>
+    <li><a href="../learn-python.html" class="active">learn python</a></li>
+    <li><a href="../python-web-interpreter.html" target="_blank" rel="noopener noreferrer">code runner</a></li>
+    <li><button type="button" class="pw-nav-btn" data-modal-open="license-modal">license info</button></li>
+    <li><button type="button" class="pw-nav-btn" data-modal-open="tco-modal">TCO presentation</button></li>
+    <li><button type="button" class="pw-nav-btn" data-modal-open="contact-modal">contact</button></li>
+  </ul>
+</header>
+
+<div class="lp-layout">
+
+  <button type="button" class="lp-sidebar-toggle" id="sidebarToggle">☰ Sections</button>
+
+  <aside class="lp-sidebar" id="lpSidebar">
+    <nav id="courseNav"><!-- rendered by course.js from course-data.js --></nav>
+  </aside>
+
+  <main class="lp-content">
+<section class="lp-section" id="sec-if-else">
+<h2>If-Else</h2>
+<p class="lp-section-desc">How Python makes decisions — running one block of code instead of another based on a condition.</p>
+<div class="lp-subsection" id="ie-if">
+<h3>If Statement</h3>
+<p>An <code class="lp-inline">if</code> statement tests a condition. If it evaluates to <code class="lp-inline">True</code>, the indented block underneath runs; otherwise Python skips straight past it.</p>
+<pre class="code-block">age = 20
+if age &gt;= 18:
+    print("You can vote.")</pre>
+<div class="code-output">You can vote.</div>
+</div>
+<div class="lp-subsection" id="ie-else">
+<h3>Else Statement</h3>
+<p>An <code class="lp-inline">else</code> block runs only when the <code class="lp-inline">if</code> condition (and every <code class="lp-inline">elif</code> above it) turned out <code class="lp-inline">False</code>. It can't have its own condition — it's the catch-all.</p>
+<pre class="code-block">age = 15
+if age &gt;= 18:
+    print("You can vote.")
+else:
+    print("Not old enough yet.")</pre>
+<div class="code-output">Not old enough yet.</div>
+</div>
+<div class="lp-subsection" id="ie-elif">
+<h3>Elif Statement</h3>
+<p>When there's more than one condition to check, <code class="lp-inline">elif</code> ("else if") chains additional tests between the <code class="lp-inline">if</code> and the <code class="lp-inline">else</code>. Python checks them top to bottom and runs the first block whose condition is <code class="lp-inline">True</code> — the rest are skipped, even if they'd also be true.</p>
+<pre class="code-block">age = 19
+
+if age &lt; 13:
+    print("Child")
+elif age &lt; 20:
+    print("Teenager")
+else:
+    print("Adult")</pre>
+<div class="code-output">Teenager</div>
+<p><code class="lp-inline">if</code> statements can also be nested inside each other for more layered decisions:</p>
+<pre class="code-block">age = 25
+height = 160
+
+if age &gt;= 18:
+    if height &gt; 180:
+        print("Eligible to race.")
+    else:
+        print("Old enough, but not tall enough.")
+else:
+    print("Too young to race.")</pre>
+<div class="code-output">Old enough, but not tall enough.</div>
+</div>
+</section>
+    <nav class="lp-topic-nav">
+      <a href="data-types.html" class="prev"><span class="dir">&larr; Previous</span>Data Types</a>
+      <a href="looping.html" class="next"><span class="dir">Next &rarr;</span>Loops</a>
+    </nav>
+  </main>
+</div>
+
+<script src="../modals.js"></script>
+<script src="course-data.js"></script>
+<script src="course.js"></script>
+
+</body>
+</html>

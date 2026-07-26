@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ProgramWise — Basics</title>
+<link rel="stylesheet" href="../style.css" />
+<link rel="stylesheet" href="course.css" />
+</head>
+<body>
+
+<header class="pw-header">
+  <a href="../index.html#about" class="pw-logo">ProgramWise<span class="cursor"></span></a>
+  <ul class="pw-nav">
+    <li><a href="../index.html#about">about</a></li>
+    <li><a href="../learn-python.html" class="active">learn python</a></li>
+    <li><a href="../python-web-interpreter.html" target="_blank" rel="noopener noreferrer">code runner</a></li>
+    <li><button type="button" class="pw-nav-btn" data-modal-open="license-modal">license info</button></li>
+    <li><button type="button" class="pw-nav-btn" data-modal-open="tco-modal">TCO presentation</button></li>
+    <li><button type="button" class="pw-nav-btn" data-modal-open="contact-modal">contact</button></li>
+  </ul>
+</header>
+
+<div class="lp-layout">
+
+  <button type="button" class="lp-sidebar-toggle" id="sidebarToggle">☰ Sections</button>
+
+  <aside class="lp-sidebar" id="lpSidebar">
+    <nav id="courseNav"><!-- rendered by course.js from course-data.js --></nav>
+  </aside>
+
+  <main class="lp-content">
+<section class="lp-section" id="sec-basics">
+<h2>Basics</h2>
+<p class="lp-section-desc">The building blocks of every Python program — how to show output, name things, structure code, and get input from a user.</p>
+<div class="lp-subsection" id="basics-print">
+<h3>Print</h3>
+<p>The <code class="lp-inline">print()</code> function writes output to the screen. Pass it multiple values separated by commas and Python prints them with a space between each one by default.</p>
+<pre class="code-block">print("ByteWise", "Ultimate")</pre>
+<div class="code-output">ByteWise Ultimate</div>
+<p>Two optional keyword arguments give you more control: <code class="lp-inline">sep</code> changes what's inserted between values, and <code class="lp-inline">end</code> changes what's printed after the last one (a newline, <code class="lp-inline">"\n"</code>, by default).</p>
+<pre class="code-block">print("ByteWise", "Ultimate", sep=" | ")
+print("Loading", end="...")
+print("done")</pre>
+<div class="code-output">ByteWise | Ultimate
+Loading...done</div>
+</div>
+<div class="lp-subsection" id="basics-keywords">
+<h3>Keywords &amp; Identifiers</h3>
+<p>Keywords are reserved words built into Python's grammar. You can't use them as variable names because they already have a special meaning. Some of the most common ones:</p>
+<ul>
+<li><code class="lp-inline">if</code>, <code class="lp-inline">elif</code>, <code class="lp-inline">else</code> — conditional statements</li>
+<li><code class="lp-inline">for</code>, <code class="lp-inline">while</code> — loops</li>
+<li><code class="lp-inline">def</code>, <code class="lp-inline">return</code> — defining and exiting functions</li>
+<li><code class="lp-inline">True</code>, <code class="lp-inline">False</code>, <code class="lp-inline">None</code> — the only built-in keywords that start with a capital letter</li>
+<li><code class="lp-inline">and</code>, <code class="lp-inline">or</code>, <code class="lp-inline">not</code>, <code class="lp-inline">in</code>, <code class="lp-inline">is</code> — logical, membership, and identity operators</li>
+<li><code class="lp-inline">break</code>, <code class="lp-inline">continue</code>, <code class="lp-inline">pass</code> — loop control</li>
+<li><code class="lp-inline">try</code>, <code class="lp-inline">except</code>, <code class="lp-inline">finally</code> — exception handling</li>
+</ul>
+<p>Identifiers are the names you choose for variables, functions, and everything else. A few rules keep them valid:</p>
+<ul>
+<li>Must start with a letter or an underscore — never a digit</li>
+<li>Can contain letters, digits, and underscores after that first character</li>
+<li>No spaces or other special characters allowed</li>
+<li>Can't be a keyword</li>
+<li>Case-sensitive — <code class="lp-inline">age</code> and <code class="lp-inline">Age</code> are different variables</li>
+</ul>
+<pre class="code-block">user_name = "ByteWise"    # valid
+_score = 100              # valid, starts with an underscore
+2nd_place = "silver"      # invalid - starts with a digit
+class = "example"         # invalid - 'class' is a keyword</pre>
+</div>
+<div class="lp-subsection" id="basics-blocks">
+<h3>Blocks &amp; Indentation</h3>
+<p>Instead of curly braces, Python uses indentation to mark where a block of code starts and ends. The convention is 4 spaces per level. Every colon-terminated line — <code class="lp-inline">if</code>, <code class="lp-inline">for</code>, <code class="lp-inline">while</code>, <code class="lp-inline">def</code>, and more — opens a new indented block underneath it.</p>
+<pre class="code-block">def square_all(n):
+    for i in range(n):
+        result = i ** 2
+        print(result)
+
+square_all(4)</pre>
+<div class="code-output">0
+1
+4
+9</div>
+<p>Mixing tabs and spaces, or indenting inconsistently, raises an <code class="lp-inline">IndentationError</code>. Python is strict about this on purpose — indentation always reflects the real structure of your code.</p>
+</div>
+<div class="lp-subsection" id="basics-operators">
+<h3>Operators</h3>
+<p>Operators combine values into new ones. Python groups them into a few families.</p>
+<p><strong style="color:var(--paper)">Arithmetic</strong> — do the math you'd expect, with two small surprises: <code class="lp-inline">/</code> always returns a float, even on an exact division, and <code class="lp-inline">//</code> (floor division) returns a float too if either operand is already a float.</p>
+<pre class="code-block">print(6 / 2)
+print(7 // 2)
+print(6.5 // 2)
+print(17 % 6)</pre>
+<div class="code-output">3.0
+3
+3.0
+5</div>
+<p><strong style="color:var(--paper)">Relational</strong> — compare two values and return a bool. Strings are compared character by character using their underlying character codes, not their length.</p>
+<pre class="code-block">print(3 == 3)
+print("a" &gt; "z")
+print("Bro" &lt; "x")</pre>
+<div class="code-output">True
+False
+True</div>
+<p><strong style="color:var(--paper)">Logical</strong> — combine boolean expressions. <code class="lp-inline">and</code> needs both sides True, <code class="lp-inline">or</code> needs at least one, and <code class="lp-inline">not</code> flips the result.</p>
+<pre class="code-block">a = 3 &gt; 4
+b = 0 != 1
+print(a and b)
+print(a or b)
+print(not b)</pre>
+<div class="code-output">False
+True
+False</div>
+<p><strong style="color:var(--paper)">Assignment</strong> — <code class="lp-inline">=</code> assigns a value. The augmented forms (<code class="lp-inline">+=</code>, <code class="lp-inline">-=</code>, <code class="lp-inline">*=</code>, <code class="lp-inline">/=</code>, <code class="lp-inline">//=</code>, <code class="lp-inline">%=</code>, <code class="lp-inline">**=</code>) update a variable using its current value in one step.</p>
+<pre class="code-block">a = 16
+a += 5
+a -= 5
+a *= 2
+print(a)</pre>
+<div class="code-output">32</div>
+<p><strong style="color:var(--paper)">Identity &amp; Membership</strong> — <code class="lp-inline">is</code> / <code class="lp-inline">is not</code> check whether two names point to the exact same object in memory, a different question from whether they're equal (<code class="lp-inline">==</code>). <code class="lp-inline">in</code> / <code class="lp-inline">not in</code> check whether a value exists inside a sequence.</p>
+<pre class="code-block">s1 = "ByteWise"
+s2 = "ByteWise"
+print(s1 == s2)
+print(s1 is s2)
+print("Byte" in s1)</pre>
+<div class="code-output">True
+True
+True</div>
+</div>
+<div class="lp-subsection" id="basics-comments">
+<h3>Comments</h3>
+<p>Comments are notes for humans — Python ignores them completely when running the code. A single-line comment starts with <code class="lp-inline">#</code>. For notes spanning multiple lines, wrap them in triple quotes.</p>
+<pre class="code-block"># This explains what the next line does
+total = price * quantity   # inline comments work too
+
+"""
+This is a multi-line comment.
+Useful for longer explanations.
+"""</pre>
+</div>
+<div class="lp-subsection" id="basics-input">
+<h3>Input</h3>
+<p><code class="lp-inline">input()</code> pauses the program and waits for the user to type something and press Enter. Whatever they type always comes back as a string — even if it looks like a number — so you need to convert it explicitly to do math with it.</p>
+<pre class="code-block">name = input("Enter your name: ")
+print(name, type(name))</pre>
+<div class="code-output">Enter your name: ByteWise
+ByteWise &lt;class 'str'&gt;</div>
+<p>Trying to add a raw input straight to a number raises a <code class="lp-inline">TypeError</code>, because you'd be mixing a string with an int:</p>
+<pre class="code-block">age = input("Enter age: ")
+print(age + 10)</pre>
+<div class="code-output">Enter age: 17
+TypeError: can only concatenate str (not "int") to str</div>
+<p>Wrapping the input in <code class="lp-inline">int()</code> fixes it:</p>
+<pre class="code-block">age = int(input("Enter age: "))
+print(age + 10)</pre>
+<div class="code-output">Enter age: 17
+27</div>
+</div>
+</section>
+    <nav class="lp-topic-nav">
+      
+      <a href="data-types.html" class="next"><span class="dir">Next &rarr;</span>Data Types</a>
+    </nav>
+  </main>
+</div>
+
+<script src="../modals.js"></script>
+<script src="course-data.js"></script>
+<script src="course.js"></script>
+
+</body>
+</html>

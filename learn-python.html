@@ -5,7 +5,63 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>ProgramWise — Learn Python</title>
 <link rel="stylesheet" href="style.css" />
-<link rel="stylesheet" href="learn-python.css" />
+<style>
+.intro-wrap{
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 72px 32px 100px;
+}
+.intro-wrap h1{
+  font-family: var(--font-mono);
+  font-size: 34px;
+  color: var(--paper);
+  margin: 0 0 12px;
+}
+.intro-lede{
+  color: var(--mute);
+  font-size: 16px;
+  margin: 0 0 48px;
+  max-width: 560px;
+}
+
+.intro-block{ margin-bottom: 36px; }
+.intro-block h2{
+  font-family: var(--font-mono);
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: var(--gold);
+  margin: 0 0 10px;
+}
+.intro-block p{ color: var(--paper); font-size: 15.5px; line-height: 1.75; margin: 0 0 10px; max-width: 620px; }
+.intro-block ul{ color: var(--paper); font-size: 15.5px; line-height: 1.75; margin: 0; padding-left: 20px; max-width: 620px; }
+.intro-block li{ margin-bottom: 6px; }
+
+.intro-ctas{
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-top: 48px;
+  padding-top: 32px;
+  border-top: 1px solid var(--line);
+}
+.btn{
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  padding: 13px 22px;
+  border-radius: 8px;
+  display: inline-block;
+  transition: transform .12s ease, background .15s ease, border-color .15s ease;
+}
+.btn:hover{ transform: translateY(-1px); }
+.btn-primary{ background: var(--gold); color: var(--ink); }
+.btn-primary:hover{ background: #eab663; }
+.btn-ghost{ background: transparent; color: var(--paper); border: 1px solid var(--line); }
+.btn-ghost:hover{ border-color: var(--teal); color: var(--teal); }
+
+</style>
 </head>
 <body>
 
@@ -14,576 +70,44 @@
   <ul class="pw-nav">
     <li><a href="index.html#about">about</a></li>
     <li><a href="learn-python.html" class="active">learn python</a></li>
-    <li><a href="python-web-interpreter.html">code runner</a></li>
+    <li><a href="python-web-interpreter.html" target="_blank" rel="noopener noreferrer">code runner</a></li>
     <li><button type="button" class="pw-nav-btn" data-modal-open="license-modal">license info</button></li>
     <li><button type="button" class="pw-nav-btn" data-modal-open="tco-modal">TCO presentation</button></li>
     <li><button type="button" class="pw-nav-btn" data-modal-open="contact-modal">contact</button></li>
   </ul>
 </header>
 
-<div class="lp-layout">
+<div class="intro-wrap">
+  <h1>Learn Python</h1>
+  <p class="intro-lede">A quick orientation before you dive in.</p>
 
-  <!-- ================= Sidebar ================= -->
-  <button type="button" class="lp-sidebar-toggle" id="sidebarToggle">☰ Sections</button>
+  <div class="intro-block">
+    <h2>What is Python?</h2>
+    <p>Python is a high-level, general-purpose programming language known for its clean, readable syntax. It's used for everything from websites and automation scripts to data analysis and AI.</p>
+  </div>
 
-  <aside class="lp-sidebar" id="lpSidebar">
-    <nav>
+  <div class="intro-block">
+    <h2>A Short History of Python</h2>
+    <p>Python was created by Guido van Rossum and first released in 1991. It was designed to prioritize readability and simplicity — and its name comes from Monty Python's Flying Circus, not the snake.</p>
+  </div>
 
-      <div class="lp-group open">
-        <button type="button" class="lp-group-title">Basics <span class="chevron">▶</span></button>
-        <ul class="lp-sublist">
-          <li><a href="#basics-print" class="lp-sublink">Print</a></li>
-          <li><a href="#basics-keywords" class="lp-sublink">Keywords &amp; Identifiers</a></li>
-          <li><a href="#basics-blocks" class="lp-sublink">Blocks &amp; Indentation</a></li>
-          <li><a href="#basics-operators" class="lp-sublink">Operators</a></li>
-          <li><a href="#basics-comments" class="lp-sublink">Comments</a></li>
-          <li><a href="#basics-input" class="lp-sublink">Input</a></li>
-        </ul>
-      </div>
+  <div class="intro-block">
+    <h2>Why Python?</h2>
+    <ul>
+      <li>Easy to read and write, even as a first language</li>
+      <li>A huge ecosystem of libraries for almost anything</li>
+      <li>Runs everywhere — web, scripts, data, AI</li>
+      <li>Backed by a massive, active community</li>
+    </ul>
+  </div>
 
-      <div class="lp-group">
-        <button type="button" class="lp-group-title">Data Types <span class="chevron">▶</span></button>
-        <ul class="lp-sublist">
-          <li><a href="#dt-intro" class="lp-sublink">Introduction</a></li>
-          <li><a href="#dt-mutable" class="lp-sublink">Mutable</a></li>
-          <li><a href="#dt-immutable" class="lp-sublink">Immutable</a></li>
-          <li><a href="#dt-casting" class="lp-sublink">Type Casting</a></li>
-        </ul>
-      </div>
-
-      <div class="lp-group">
-        <button type="button" class="lp-group-title">If-Else <span class="chevron">▶</span></button>
-        <ul class="lp-sublist">
-          <li><a href="#ie-if" class="lp-sublink">If Statement</a></li>
-          <li><a href="#ie-else" class="lp-sublink">Else Statement</a></li>
-          <li><a href="#ie-elif" class="lp-sublink">Elif Statement</a></li>
-        </ul>
-      </div>
-
-      <div class="lp-group">
-        <button type="button" class="lp-group-title">Loops <span class="chevron">▶</span></button>
-        <ul class="lp-sublist">
-          <li><a href="#loop-for" class="lp-sublink">For Loop &amp; Range</a></li>
-          <li><a href="#loop-while" class="lp-sublink">While Loop</a></li>
-          <li><a href="#loop-break-continue" class="lp-sublink">Break &amp; Continue</a></li>
-        </ul>
-      </div>
-
-      <div class="lp-group">
-        <button type="button" class="lp-group-title">Strings <span class="chevron">▶</span></button>
-        <ul class="lp-sublist">
-          <li><a href="#str-intro" class="lp-sublink">Introduction</a></li>
-          <li><a href="#str-indexing" class="lp-sublink">Indexing &amp; Slicing</a></li>
-          <li><a href="#str-operators" class="lp-sublink">Operators</a></li>
-          <li><a href="#str-methods" class="lp-sublink">Methods</a></li>
-        </ul>
-      </div>
-
-      <div class="lp-group">
-        <button type="button" class="lp-group-title">List <span class="chevron">▶</span></button>
-        <ul class="lp-sublist">
-          <li><a href="#list-intro" class="lp-sublink">Introduction</a></li>
-          <li><a href="#list-indexing" class="lp-sublink">Indexing &amp; Slicing</a></li>
-          <li><a href="#list-operators" class="lp-sublink">Operators</a></li>
-          <li><a href="#list-methods" class="lp-sublink">Methods</a></li>
-        </ul>
-      </div>
-
-      <div class="lp-group">
-        <button type="button" class="lp-group-title">Tuples <span class="chevron">▶</span></button>
-        <ul class="lp-sublist">
-          <li><a href="#tup-intro" class="lp-sublink">Introduction</a></li>
-          <li><a href="#tup-indexing" class="lp-sublink">Indexing &amp; Slicing</a></li>
-          <li><a href="#tup-operators" class="lp-sublink">Operators</a></li>
-          <li><a href="#tup-methods" class="lp-sublink">Methods</a></li>
-        </ul>
-      </div>
-
-      <div class="lp-group">
-        <button type="button" class="lp-group-title">Dictionaries <span class="chevron">▶</span></button>
-        <ul class="lp-sublist">
-          <li><a href="#dict-intro" class="lp-sublink">Introduction</a></li>
-          <li><a href="#dict-access" class="lp-sublink">Accessing Elements</a></li>
-          <li><a href="#dict-methods" class="lp-sublink">Methods</a></li>
-        </ul>
-      </div>
-
-      <div class="lp-group">
-        <button type="button" class="lp-group-title">Functions <span class="chevron">▶</span></button>
-        <ul class="lp-sublist">
-          <li><a href="#fn-basics" class="lp-sublink">Basics</a></li>
-          <li><a href="#fn-return" class="lp-sublink">Return</a></li>
-          <li><a href="#fn-arguments" class="lp-sublink">Arguments</a></li>
-          <li><a href="#fn-scope" class="lp-sublink">Scope</a></li>
-        </ul>
-      </div>
-
-      <div class="lp-group">
-        <button type="button" class="lp-group-title">Exception Handling <span class="chevron">▶</span></button>
-        <ul class="lp-sublist">
-          <li><a href="#exc-types" class="lp-sublink">Types of Errors</a></li>
-          <li><a href="#exc-try" class="lp-sublink">Try-Except &amp; Finally</a></li>
-        </ul>
-      </div>
-
-      <div class="lp-group">
-        <button type="button" class="lp-group-title">File Handling <span class="chevron">▶</span></button>
-        <ul class="lp-sublist">
-          <li><a href="#fh-basics" class="lp-sublink">Basics (Opening &amp; Closing, File Modes)</a></li>
-          <li><a href="#fh-with" class="lp-sublink">With Clause</a></li>
-          <li><a href="#fh-text" class="lp-sublink">Text Files</a></li>
-          <li><a href="#fh-pointers" class="lp-sublink">File Pointers</a></li>
-          <li><a href="#fh-binary" class="lp-sublink">Binary Files &amp; Pickle</a></li>
-          <li><a href="#fh-csv" class="lp-sublink">CSV Files</a></li>
-        </ul>
-      </div>
-
-      <a href="#sec-math" class="lp-toplink">Math Module</a>
-      <a href="#sec-random" class="lp-toplink">Random Module</a>
-      <a href="#sec-statistics" class="lp-toplink">Statistics Module</a>
-
-    </nav>
-  </aside>
-
-  <!-- ================= Main content ================= -->
-  <main class="lp-content">
-
-    <!-- ========== BASICS ========== -->
-    <section class="lp-section" id="sec-basics">
-      <h2>Basics</h2>
-      <p class="lp-section-desc">The building blocks of every Python program — how to show output, name things, structure code, and get input from a user.</p>
-
-      <div class="lp-subsection" id="basics-print">
-        <h3>Print</h3>
-        <p>The <code class="lp-inline">print()</code> function writes output to the screen. Pass it multiple values separated by commas and Python prints them with a space between each one by default.</p>
-        <pre class="code-block">print("ByteWise", "Ultimate")</pre>
-        <div class="code-output">ByteWise Ultimate</div>
-        <p>Two optional keyword arguments give you more control: <code class="lp-inline">sep</code> changes what's inserted between values, and <code class="lp-inline">end</code> changes what's printed after the last one (a newline, <code class="lp-inline">"\n"</code>, by default).</p>
-        <pre class="code-block">print("ByteWise", "Ultimate", sep=" | ")
-print("Loading", end="...")
-print("done")</pre>
-        <div class="code-output">ByteWise | Ultimate
-Loading...done</div>
-      </div>
-
-      <div class="lp-subsection" id="basics-keywords">
-        <h3>Keywords &amp; Identifiers</h3>
-        <p>Keywords are reserved words built into Python's grammar. You can't use them as variable names because they already have a special meaning. Some of the most common ones:</p>
-        <ul>
-          <li><code class="lp-inline">if</code>, <code class="lp-inline">elif</code>, <code class="lp-inline">else</code> — conditional statements</li>
-          <li><code class="lp-inline">for</code>, <code class="lp-inline">while</code> — loops</li>
-          <li><code class="lp-inline">def</code>, <code class="lp-inline">return</code> — defining and exiting functions</li>
-          <li><code class="lp-inline">True</code>, <code class="lp-inline">False</code>, <code class="lp-inline">None</code> — the only built-in keywords that start with a capital letter</li>
-          <li><code class="lp-inline">and</code>, <code class="lp-inline">or</code>, <code class="lp-inline">not</code>, <code class="lp-inline">in</code>, <code class="lp-inline">is</code> — logical, membership, and identity operators</li>
-          <li><code class="lp-inline">break</code>, <code class="lp-inline">continue</code>, <code class="lp-inline">pass</code> — loop control</li>
-          <li><code class="lp-inline">try</code>, <code class="lp-inline">except</code>, <code class="lp-inline">finally</code> — exception handling</li>
-        </ul>
-        <p>Identifiers are the names you choose for variables, functions, and everything else. A few rules keep them valid:</p>
-        <ul>
-          <li>Must start with a letter or an underscore — never a digit</li>
-          <li>Can contain letters, digits, and underscores after that first character</li>
-          <li>No spaces or other special characters allowed</li>
-          <li>Can't be a keyword</li>
-          <li>Case-sensitive — <code class="lp-inline">age</code> and <code class="lp-inline">Age</code> are different variables</li>
-        </ul>
-        <pre class="code-block">user_name = "ByteWise"    # valid
-_score = 100              # valid, starts with an underscore
-2nd_place = "silver"      # invalid - starts with a digit
-class = "example"         # invalid - 'class' is a keyword</pre>
-      </div>
-
-      <div class="lp-subsection" id="basics-blocks">
-        <h3>Blocks &amp; Indentation</h3>
-        <p>Instead of curly braces, Python uses indentation to mark where a block of code starts and ends. The convention is 4 spaces per level. Every colon-terminated line — <code class="lp-inline">if</code>, <code class="lp-inline">for</code>, <code class="lp-inline">while</code>, <code class="lp-inline">def</code>, and more — opens a new indented block underneath it.</p>
-        <pre class="code-block">def square_all(n):
-    for i in range(n):
-        result = i ** 2
-        print(result)
-
-square_all(4)</pre>
-        <div class="code-output">0
-1
-4
-9</div>
-        <p>Mixing tabs and spaces, or indenting inconsistently, raises an <code class="lp-inline">IndentationError</code>. Python is strict about this on purpose — indentation always reflects the real structure of your code.</p>
-      </div>
-
-      <div class="lp-subsection" id="basics-operators">
-        <h3>Operators</h3>
-        <p>Operators combine values into new ones. Python groups them into a few families.</p>
-
-        <p><strong style="color:var(--paper)">Arithmetic</strong> — do the math you'd expect, with two small surprises: <code class="lp-inline">/</code> always returns a float, even on an exact division, and <code class="lp-inline">//</code> (floor division) returns a float too if either operand is already a float.</p>
-        <pre class="code-block">print(6 / 2)
-print(7 // 2)
-print(6.5 // 2)
-print(17 % 6)</pre>
-        <div class="code-output">3.0
-3
-3.0
-5</div>
-
-        <p><strong style="color:var(--paper)">Relational</strong> — compare two values and return a bool. Strings are compared character by character using their underlying character codes, not their length.</p>
-        <pre class="code-block">print(3 == 3)
-print("a" > "z")
-print("Bro" < "x")</pre>
-        <div class="code-output">True
-False
-True</div>
-
-        <p><strong style="color:var(--paper)">Logical</strong> — combine boolean expressions. <code class="lp-inline">and</code> needs both sides True, <code class="lp-inline">or</code> needs at least one, and <code class="lp-inline">not</code> flips the result.</p>
-        <pre class="code-block">a = 3 > 4
-b = 0 != 1
-print(a and b)
-print(a or b)
-print(not b)</pre>
-        <div class="code-output">False
-True
-False</div>
-
-        <p><strong style="color:var(--paper)">Assignment</strong> — <code class="lp-inline">=</code> assigns a value. The augmented forms (<code class="lp-inline">+=</code>, <code class="lp-inline">-=</code>, <code class="lp-inline">*=</code>, <code class="lp-inline">/=</code>, <code class="lp-inline">//=</code>, <code class="lp-inline">%=</code>, <code class="lp-inline">**=</code>) update a variable using its current value in one step.</p>
-        <pre class="code-block">a = 16
-a += 5
-a -= 5
-a *= 2
-print(a)</pre>
-        <div class="code-output">32</div>
-
-        <p><strong style="color:var(--paper)">Identity &amp; Membership</strong> — <code class="lp-inline">is</code> / <code class="lp-inline">is not</code> check whether two names point to the exact same object in memory, a different question from whether they're equal (<code class="lp-inline">==</code>). <code class="lp-inline">in</code> / <code class="lp-inline">not in</code> check whether a value exists inside a sequence.</p>
-        <pre class="code-block">s1 = "ByteWise"
-s2 = "ByteWise"
-print(s1 == s2)
-print(s1 is s2)
-print("Byte" in s1)</pre>
-        <div class="code-output">True
-True
-True</div>
-      </div>
-
-      <div class="lp-subsection" id="basics-comments">
-        <h3>Comments</h3>
-        <p>Comments are notes for humans — Python ignores them completely when running the code. A single-line comment starts with <code class="lp-inline">#</code>. For notes spanning multiple lines, wrap them in triple quotes.</p>
-        <pre class="code-block"># This explains what the next line does
-total = price * quantity   # inline comments work too
-
-"""
-This is a multi-line comment.
-Useful for longer explanations.
-"""</pre>
-      </div>
-
-      <div class="lp-subsection" id="basics-input">
-        <h3>Input</h3>
-        <p><code class="lp-inline">input()</code> pauses the program and waits for the user to type something and press Enter. Whatever they type always comes back as a string — even if it looks like a number — so you need to convert it explicitly to do math with it.</p>
-        <pre class="code-block">name = input("Enter your name: ")
-print(name, type(name))</pre>
-        <div class="code-output">Enter your name: ByteWise
-ByteWise &lt;class 'str'&gt;</div>
-        <p>Trying to add a raw input straight to a number raises a <code class="lp-inline">TypeError</code>, because you'd be mixing a string with an int:</p>
-        <pre class="code-block">age = input("Enter age: ")
-print(age + 10)</pre>
-        <div class="code-output">Enter age: 17
-TypeError: can only concatenate str (not "int") to str</div>
-        <p>Wrapping the input in <code class="lp-inline">int()</code> fixes it:</p>
-        <pre class="code-block">age = int(input("Enter age: "))
-print(age + 10)</pre>
-        <div class="code-output">Enter age: 17
-27</div>
-      </div>
-    </section>
-
-    <!-- ========== DATA TYPES ========== -->
-    <section class="lp-section" id="sec-data-types">
-      <h2>Data Types</h2>
-      <p class="lp-section-desc">Every value in Python has a type, and those types fall into a few natural families.</p>
-
-      <div class="lp-subsection" id="dt-intro">
-        <h3>Introduction</h3>
-        <p>Python's built-in types split into three broad groups: <strong style="color:var(--paper)">numbers</strong> (int, float, bool, complex), <strong style="color:var(--paper)">sequences</strong> — ordered collections that support indexing and slicing (str, list, tuple) — and <strong style="color:var(--paper)">mappings</strong> — collections accessed by key instead of position (dict).</p>
-        <ul>
-          <li><code class="lp-inline">int</code> — whole numbers, positive or negative, with no fixed size limit</li>
-          <li><code class="lp-inline">float</code> — numbers with a decimal point, or written in exponential form (<code class="lp-inline">3.5e-2</code>)</li>
-          <li><code class="lp-inline">bool</code> — <code class="lp-inline">True</code> or <code class="lp-inline">False</code>; internally treated as 1 and 0</li>
-          <li><code class="lp-inline">str</code> — text, a sequence of characters</li>
-          <li><code class="lp-inline">list</code> — an ordered, mutable collection, written with <code class="lp-inline">[ ]</code></li>
-          <li><code class="lp-inline">tuple</code> — an ordered, immutable collection, written with <code class="lp-inline">( )</code></li>
-          <li><code class="lp-inline">dict</code> — key-value pairs, written with <code class="lp-inline">{ }</code></li>
-        </ul>
-        <pre class="code-block">print(type(42))
-print(type(3.14))
-print(type(True))
-print(type("hello"))
-print(type([1, 2, 3]))</pre>
-        <div class="code-output">&lt;class 'int'&gt;
-&lt;class 'float'&gt;
-&lt;class 'bool'&gt;
-&lt;class 'str'&gt;
-&lt;class 'list'&gt;</div>
-      </div>
-
-      <div class="lp-subsection" id="dt-mutable">
-        <h3>Mutable</h3>
-        <p>Mutable types can be changed in place — modifying them updates the existing object instead of creating a new one. Lists, dictionaries, and sets are all mutable.</p>
-        <pre class="code-block">scores = [10, 20, 30]
-scores[0] = 99
-print(scores)
-
-profile = {"name": "Bytewise"}
-profile["name"] = "ProgramWise"
-print(profile)</pre>
-        <div class="code-output">[99, 20, 30]
-{'name': 'ProgramWise'}</div>
-      </div>
-
-      <div class="lp-subsection" id="dt-immutable">
-        <h3>Immutable</h3>
-        <p>Immutable types can never be changed in place — any "change" actually builds a brand new object. <code class="lp-inline">int</code>, <code class="lp-inline">float</code>, <code class="lp-inline">bool</code>, <code class="lp-inline">str</code>, and <code class="lp-inline">tuple</code> all work this way.</p>
-        <pre class="code-block">name = "Byte"
-name[0] = "b"</pre>
-        <div class="code-output">TypeError: 'str' object does not support item assignment</div>
-        <p>The same happens with tuples — you can build a new tuple, but you can't modify one that already exists:</p>
-        <pre class="code-block">point = (1, 2, 4)
-point[0] = 9</pre>
-        <div class="code-output">TypeError: 'tuple' object does not support item assignment</div>
-      </div>
-
-      <div class="lp-subsection" id="dt-casting">
-        <h3>Type Casting</h3>
-        <p>Type casting converts a value from one type to another. Python does this two ways: <strong style="color:var(--paper)">implicitly</strong>, on its own during a calculation, or <strong style="color:var(--paper)">explicitly</strong>, when you call a conversion function yourself.</p>
-        <pre class="code-block">print(3 + 6.9)
-print(True + 1)</pre>
-        <div class="code-output">9.9
-2</div>
-        <p>In the first line, <code class="lp-inline">3</code> is silently converted to a float before the addition happens. In the second, <code class="lp-inline">True</code> is treated as the integer <code class="lp-inline">1</code>.</p>
-        <pre class="code-block">print(int("10"))
-print(float("1.23"))
-print(str(99))</pre>
-        <div class="code-output">10
-1.23
-99</div>
-        <p>Explicit conversions can fail, though — a string only converts to <code class="lp-inline">int</code> if it looks like a whole number:</p>
-        <pre class="code-block">print(int("10.5"))</pre>
-        <div class="code-output">ValueError: invalid literal for int() with base 10: '10.5'</div>
-      </div>
-    </section>
-
-    <!-- ========== IF-ELSE ========== -->
-    <section class="lp-section" id="sec-if-else">
-      <h2>If-Else</h2>
-      <p class="lp-section-desc">How Python makes decisions — running one block of code instead of another based on a condition.</p>
-
-      <div class="lp-subsection" id="ie-if">
-        <h3>If Statement</h3>
-        <p>An <code class="lp-inline">if</code> statement tests a condition. If it evaluates to <code class="lp-inline">True</code>, the indented block underneath runs; otherwise Python skips straight past it.</p>
-        <pre class="code-block">age = 20
-if age >= 18:
-    print("You can vote.")</pre>
-        <div class="code-output">You can vote.</div>
-      </div>
-
-      <div class="lp-subsection" id="ie-else">
-        <h3>Else Statement</h3>
-        <p>An <code class="lp-inline">else</code> block runs only when the <code class="lp-inline">if</code> condition (and every <code class="lp-inline">elif</code> above it) turned out <code class="lp-inline">False</code>. It can't have its own condition — it's the catch-all.</p>
-        <pre class="code-block">age = 15
-if age >= 18:
-    print("You can vote.")
-else:
-    print("Not old enough yet.")</pre>
-        <div class="code-output">Not old enough yet.</div>
-      </div>
-
-      <div class="lp-subsection" id="ie-elif">
-        <h3>Elif Statement</h3>
-        <p>When there's more than one condition to check, <code class="lp-inline">elif</code> ("else if") chains additional tests between the <code class="lp-inline">if</code> and the <code class="lp-inline">else</code>. Python checks them top to bottom and runs the first block whose condition is <code class="lp-inline">True</code> — the rest are skipped, even if they'd also be true.</p>
-        <pre class="code-block">age = 19
-
-if age < 13:
-    print("Child")
-elif age < 20:
-    print("Teenager")
-else:
-    print("Adult")</pre>
-        <div class="code-output">Teenager</div>
-        <p><code class="lp-inline">if</code> statements can also be nested inside each other for more layered decisions:</p>
-        <pre class="code-block">age = 25
-height = 160
-
-if age >= 18:
-    if height > 180:
-        print("Eligible to race.")
-    else:
-        print("Old enough, but not tall enough.")
-else:
-    print("Too young to race.")</pre>
-        <div class="code-output">Old enough, but not tall enough.</div>
-      </div>
-    </section>
-
-    <!-- ========== LOOPS ========== -->
-    <section class="lp-section" id="sec-loops">
-      <h2>Loops</h2>
-      <p class="lp-section-desc">Ways to repeat code — either a set number of times, or until a condition changes.</p>
-
-      <div class="lp-subsection" id="loop-for">
-        <h3>For Loop &amp; Range</h3>
-        <p><code class="lp-inline">range()</code> generates a sequence of numbers and is most often used to control a <code class="lp-inline">for</code> loop. <code class="lp-inline">range(stop)</code> counts from 0 up to — but not including — <code class="lp-inline">stop</code>.</p>
-        <pre class="code-block">print(list(range(5)))</pre>
-        <div class="code-output">[0, 1, 2, 3, 4]</div>
-        <p>You can also give it a start and a step: <code class="lp-inline">range(start, stop, step)</code>.</p>
-        <pre class="code-block">print(list(range(2, 11, 2)))
-print(list(range(10, 0, -1)))</pre>
-        <div class="code-output">[2, 4, 6, 8, 10]
-[10, 9, 8, 7, 6, 5, 4, 3, 2, 1]</div>
-        <p>A <code class="lp-inline">for</code> loop runs its block once for every item in a sequence — a range, a string, a list, or anything else iterable.</p>
-        <pre class="code-block">for i in range(3):
-    print("Count:", i)
-
-for letter in "Hi!":
-    print(letter)</pre>
-        <div class="code-output">Count: 0
-Count: 1
-Count: 2
-H
-i
-!</div>
-        <p>Loops can be nested inside each other — handy for anything grid-shaped, like printing a pattern:</p>
-        <pre class="code-block">for i in range(4):
-    for j in range(i + 1):
-        print("*", end=" ")
-    print()</pre>
-        <div class="code-output">* 
-* * 
-* * * 
-* * * * </div>
-      </div>
-
-      <div class="lp-subsection" id="loop-while">
-        <h3>While Loop</h3>
-        <p>A <code class="lp-inline">while</code> loop keeps running its block as long as a condition stays <code class="lp-inline">True</code>. Unlike a <code class="lp-inline">for</code> loop, it doesn't know in advance how many times it'll run, which makes it useful when you're waiting for something to change.</p>
-        <pre class="code-block">counter = 0
-while counter < 3:
-    print("Current count:", counter)
-    counter += 1</pre>
-        <div class="code-output">Current count: 0
-Current count: 1
-Current count: 2</div>
-        <p>Forgetting to update the variable in the condition creates an infinite loop, since the condition never becomes <code class="lp-inline">False</code>:</p>
-        <pre class="code-block"># Careful - this never stops on its own:
-while True:
-    print("Looping forever...")</pre>
-      </div>
-
-      <div class="lp-subsection" id="loop-break-continue">
-        <h3>Break &amp; Continue</h3>
-        <p><code class="lp-inline">break</code> exits the loop immediately, skipping any remaining iterations entirely.</p>
-        <pre class="code-block">for i in range(10):
-    if i == 5:
-        print("Stopping at 5.")
-        break
-    print(i)</pre>
-        <div class="code-output">0
-1
-2
-3
-4
-Stopping at 5.</div>
-        <p><code class="lp-inline">continue</code> skips just the rest of the current iteration and moves on to the next one — the loop keeps going.</p>
-        <pre class="code-block">for i in range(5):
-    if i == 2:
-        continue
-    print(i)</pre>
-        <div class="code-output">0
-1
-3
-4</div>
-      </div>
-    </section>
-
-    <!-- ========== PLACEHOLDER SECTIONS ========== -->
-
-    <section class="lp-section lp-placeholder-section" id="sec-strings">
-      <h2>Strings</h2>
-      <p class="lp-section-desc">Coming soon.</p>
-      <div class="lp-subsection" id="str-intro"><h3>Introduction</h3><div class="lp-coming-soon">Content coming soon.</div></div>
-      <div class="lp-subsection" id="str-indexing"><h3>Indexing &amp; Slicing</h3><div class="lp-coming-soon">Content coming soon.</div></div>
-      <div class="lp-subsection" id="str-operators"><h3>Operators</h3><div class="lp-coming-soon">Content coming soon.</div></div>
-      <div class="lp-subsection" id="str-methods"><h3>Methods</h3><div class="lp-coming-soon">Content coming soon.</div></div>
-    </section>
-
-    <section class="lp-section lp-placeholder-section" id="sec-list">
-      <h2>List</h2>
-      <p class="lp-section-desc">Coming soon.</p>
-      <div class="lp-subsection" id="list-intro"><h3>Introduction</h3><div class="lp-coming-soon">Content coming soon.</div></div>
-      <div class="lp-subsection" id="list-indexing"><h3>Indexing &amp; Slicing</h3><div class="lp-coming-soon">Content coming soon.</div></div>
-      <div class="lp-subsection" id="list-operators"><h3>Operators</h3><div class="lp-coming-soon">Content coming soon.</div></div>
-      <div class="lp-subsection" id="list-methods"><h3>Methods</h3><div class="lp-coming-soon">Content coming soon.</div></div>
-    </section>
-
-    <section class="lp-section lp-placeholder-section" id="sec-tuples">
-      <h2>Tuples</h2>
-      <p class="lp-section-desc">Coming soon.</p>
-      <div class="lp-subsection" id="tup-intro"><h3>Introduction</h3><div class="lp-coming-soon">Content coming soon.</div></div>
-      <div class="lp-subsection" id="tup-indexing"><h3>Indexing &amp; Slicing</h3><div class="lp-coming-soon">Content coming soon.</div></div>
-      <div class="lp-subsection" id="tup-operators"><h3>Operators</h3><div class="lp-coming-soon">Content coming soon.</div></div>
-      <div class="lp-subsection" id="tup-methods"><h3>Methods</h3><div class="lp-coming-soon">Content coming soon.</div></div>
-    </section>
-
-    <section class="lp-section lp-placeholder-section" id="sec-dict">
-      <h2>Dictionaries</h2>
-      <p class="lp-section-desc">Coming soon.</p>
-      <div class="lp-subsection" id="dict-intro"><h3>Introduction</h3><div class="lp-coming-soon">Content coming soon.</div></div>
-      <div class="lp-subsection" id="dict-access"><h3>Accessing Elements</h3><div class="lp-coming-soon">Content coming soon.</div></div>
-      <div class="lp-subsection" id="dict-methods"><h3>Methods</h3><div class="lp-coming-soon">Content coming soon.</div></div>
-    </section>
-
-    <section class="lp-section lp-placeholder-section" id="sec-functions">
-      <h2>Functions</h2>
-      <p class="lp-section-desc">Coming soon.</p>
-      <div class="lp-subsection" id="fn-basics"><h3>Basics</h3><div class="lp-coming-soon">Content coming soon.</div></div>
-      <div class="lp-subsection" id="fn-return"><h3>Return</h3><div class="lp-coming-soon">Content coming soon.</div></div>
-      <div class="lp-subsection" id="fn-arguments"><h3>Arguments</h3><div class="lp-coming-soon">Content coming soon.</div></div>
-      <div class="lp-subsection" id="fn-scope"><h3>Scope</h3><div class="lp-coming-soon">Content coming soon.</div></div>
-    </section>
-
-    <section class="lp-section lp-placeholder-section" id="sec-exceptions">
-      <h2>Exception Handling</h2>
-      <p class="lp-section-desc">Coming soon.</p>
-      <div class="lp-subsection" id="exc-types"><h3>Types of Errors</h3><div class="lp-coming-soon">Content coming soon.</div></div>
-      <div class="lp-subsection" id="exc-try"><h3>Try-Except &amp; Finally</h3><div class="lp-coming-soon">Content coming soon.</div></div>
-    </section>
-
-    <section class="lp-section lp-placeholder-section" id="sec-file-handling">
-      <h2>File Handling</h2>
-      <p class="lp-section-desc">Coming soon.</p>
-      <div class="lp-subsection" id="fh-basics"><h3>Basics (Opening &amp; Closing, File Modes)</h3><div class="lp-coming-soon">Content coming soon.</div></div>
-      <div class="lp-subsection" id="fh-with"><h3>With Clause</h3><div class="lp-coming-soon">Content coming soon.</div></div>
-      <div class="lp-subsection" id="fh-text"><h3>Text Files</h3><div class="lp-coming-soon">Content coming soon.</div></div>
-      <div class="lp-subsection" id="fh-pointers"><h3>File Pointers</h3><div class="lp-coming-soon">Content coming soon.</div></div>
-      <div class="lp-subsection" id="fh-binary"><h3>Binary Files &amp; Pickle</h3><div class="lp-coming-soon">Content coming soon.</div></div>
-      <div class="lp-subsection" id="fh-csv"><h3>CSV Files</h3><div class="lp-coming-soon">Content coming soon.</div></div>
-    </section>
-
-    <section class="lp-section lp-placeholder-section" id="sec-math">
-      <h2>Math Module</h2>
-      <div class="lp-coming-soon">Content coming soon.</div>
-    </section>
-
-    <section class="lp-section lp-placeholder-section" id="sec-random">
-      <h2>Random Module</h2>
-      <div class="lp-coming-soon">Content coming soon.</div>
-    </section>
-
-    <section class="lp-section lp-placeholder-section" id="sec-statistics">
-      <h2>Statistics Module</h2>
-      <div class="lp-coming-soon">Content coming soon.</div>
-    </section>
-
-  </main>
+  <div class="intro-ctas">
+    <a class="btn btn-primary" href="course/basics.html">Start the Course →</a>
+    <a class="btn btn-ghost" href="python-web-interpreter.html" target="_blank" rel="noopener noreferrer">Try the Code Runner</a>
+  </div>
 </div>
 
-<!-- Modal markup for License info / TCO presentation / Contact now
-     lives in modals.html — modals.js fetches and injects it automatically. -->
 <script src="modals.js"></script>
-<script src="learn-python.js"></script>
 
 </body>
 </html>
